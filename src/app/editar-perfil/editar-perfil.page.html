@@ -10,84 +10,61 @@
 </ion-header>
 
 <ion-content class="ion-padding">
-  
-  <!-- <div padding>
-    <ion-item>
-      <img *ngIf="avatarURL" [src]="avatarURL" />
-    </ion-item>
-    <ion-item>
-      <input name="file" type="file" accept="image/x-png,image/jpeg" (change)="selectedFile($event)" ngModel required />
-    </ion-item>
-  </div>
-  <div padding>
-    <ion-button size="large" type="submit" [disabled]="f.invalid" expand="block">Update photo</ion-button>
-  </div> -->
-
-    <!-- <div> -->
-      <!-- <ion-item>
-      <img *ngIf="image"  accept="image/x-png,image/jpeg" type= "file" [src]="image" />
-    </ion-item> -->
-    <!-- <ion-item>
-      <input name="file" type="file" accept="image/x-png,image/jpeg" 
-      (change)="selectedFile($event)" ngModel required />
-    </ion-item>
-    <ion-item>
-      <ion-button (click)="onClick()">Escolher Imagem</ion-button>
-    </ion-item>
-    </div> -->
   <div id="header">
-    <button>
-      <img src="/assets/imgs/foto.jpg" />
-      <ion-icon slot="end" name="camera"></ion-icon>
-    </button>
+    <!-- <button> -->
+    <img src="/assets/imgs/foto.jpg" width="100" height="100" />
+    <!-- <ion-icon slot="end" name="camera"></ion-icon> -->
+    <!-- </button> -->
   </div>
-
-  
-<form (ngSubmit)="AlterarUsuario()">
-    <ion-button expand="block" fill="outline" type="submit">Enviar</ion-button>
-    <ion-card>
-      <ion-item>
-        <ion-label position="stacked">Login</ion-label>
-        <ion-input type="text" name="Login" [(ngModel)]="usuarioLocal.Login"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Senha</ion-label>
-        <ion-input type="text" name="Senha" [(ngModel)]="usuarioLocal.Senha"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="stacked">Nome</ion-label>
-        <ion-input type="text" name="Nome" [(ngModel)]="usuarioLocal.Nome"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">Endereco</ion-label>
-        <ion-input type="text" name="Endereco" [(ngModel)]="usuarioLocal.Endereco"></ion-input>
-      </ion-item>
-      <!-- <ion-item>
-        <ion-label position="stacked">Nascimento</ion-label>
-        <ion-datetime name="nascimento" type="date" placeholder="Selecione a data" displayFormat="DD/MM/YYYY">
-        </ion-datetime>
-      </ion-item> -->
-      <ion-item>
-        <ion-label position="stacked">CPF</ion-label>
-        <ion-input type="text" name="CPF" [(ngModel)]="usuarioLocal.CPF"></ion-input>
-      </ion-item>
-      <ion-item>
-        <ion-label position="stacked">RG</ion-label>
-        <ion-input type="text" name="RG" [(ngModel)]="usuarioLocal.RG"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="stacked">Telefone</ion-label>
-        <ion-input type="text" name="Telefone" [(ngModel)]="usuarioLocal.Telefone"></ion-input>
-      </ion-item>
-
-      <ion-item>
-        <ion-label position="stacked">Whatsapp</ion-label>
-        <ion-input type="text" name="Whatsapp" [(ngModel)]="usuarioLocal.Whatsapp"></ion-input>
-      </ion-item>
-    </ion-card>
-
+  <ion-card>
+  <form (ngSubmit)="AlterarUsuario()">
+    <ion-button icon-left expand="block" fill="solid" type="submit">
+      <ion-icon name="refresh"></ion-icon>Atualizar</ion-button>
+    <ion-item>
+      <ion-label position="floating">Nome</ion-label>
+      <ion-input placeholder="Digite seu nome completo" type="text" name="Nome" [(ngModel)]="usuarioLocal.Nome"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Endereco</ion-label>
+      <ion-input placeholder="Informe seu Endereço" type="text" name="Endereco" [(ngModel)]="usuarioLocal.Endereco"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Nascimento</ion-label>
+      <ion-datetime name="nascimento" type="date" placeholder="Selecione sua data de nascimento"
+        displayFormat="DD/MM/YYYY" [(ngModel)]="usuarioLocal.Nascimento"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">CPF</ion-label>
+      <ion-input placeholder="000.000.00-00" mask="000.000.000-00" type="text" name="CPF" [(ngModel)]="usuarioLocal.CPF"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">RG</ion-label>
+      <ion-input  placeholder="000.000.00-00" mask="000.000.00-00" type="text" name="RG" [(ngModel)]="usuarioLocal.RG"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Telefone</ion-label>
+      <ion-input placeholder="(000) 00000-0000" mask="(000) 00000-0000" type="text" name="Telefone"
+        [(ngModel)]="usuarioLocal.Telefone"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Whatsapp</ion-label>
+      <ion-input placeholder="(000) 00000-0000" mask="(000) 00000-0000" type="text" name="Whatsapp"
+        [(ngModel)]="usuarioLocal.Whatsapp"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">E-mail</ion-label>
+      <ion-input placeholder="seuemail@provedor.com" mask="A*@A*.S*" [dropSpecialCharacters]="false" type="text"
+        name="Email" [(ngModel)]="usuarioLocal.Email"></ion-input>
+    </ion-item>
+    <ion-title>Dados de Autenticação</ion-title>
+    <ion-item>
+      <ion-label position="floating">Login</ion-label>
+      <ion-input  placeholder="Digite um login de usuário" type="text" name="Login" [(ngModel)]="usuarioLocal.Login"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Senha</ion-label>
+      <ion-input placeholder="Digite uma senha de 8 dígitos" type="text" name="Senha" [(ngModel)]="usuarioLocal.Senha"></ion-input>
+    </ion-item>
   </form>
-
+  </ion-card>
 </ion-content>

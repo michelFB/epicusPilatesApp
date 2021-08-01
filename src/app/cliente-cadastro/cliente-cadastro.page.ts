@@ -2,7 +2,8 @@ import {Router, ActivatedRoute} from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ServidorService } from './../servidor.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-// import { BrMaskDirective, BrMaskModel } from 'br-mask';
+// import { MaskPipe } from 'ngx-mask';
+
 
 @Component({
   selector: 'app-cliente-cadastro',
@@ -16,13 +17,22 @@ export class ClienteCadastroPage implements OnInit {
   public myDate = new Date().toISOString();
   public entidade = 'Cliente';
   public entidade2 = 'Pacote';
+  ionicForm: FormGroup;
 
-
-  constructor(public servidor: ServidorService, private route: ActivatedRoute, private router: Router) {
-   this.ConsultarPacotes();
+  constructor(public servidor: ServidorService,
+    // private maskPipe: MaskPipe, 
+    public formBuilder: FormBuilder,
+    private route: ActivatedRoute,
+    private router: Router) {
+    this.ConsultarPacotes();
   }
 
 
+
+  // updateWithMask(event) {
+  //   this.ionicForm.controls.cpf.setValue(this.maskPipe.transform(event.currentTarget.value, '000.000.000-00'));
+  // }
+  
 
   InserirClientes() {
     // console.log(this.cliente);
@@ -46,5 +56,12 @@ export class ClienteCadastroPage implements OnInit {
     console.log(this.myDate);
   }
 
-  ngOnInit() { }
+  ngOnInit() {
+  //   this.ionicForm = this.formBuilder.group({
+  //     name: ['', [Validators.required, Validators.minLength(3)]],
+  //     email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
+ 
+  //   })
+  //  }
+  }
 }

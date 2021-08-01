@@ -16,54 +16,39 @@
 
 <ion-content class="ion-padding">
   <div id="header">
-    <img src="/assets/imgs/foto.jpg" />
+    <img src="/assets/imgs/foto.jpg" width="400" height="500" />
   </div>
 
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button color="secondary" size="small">
+      <ion-icon name="create" (click)="alteraUsuario()"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
   <ion-card>
-    <h1>{{usuarioLocal.Nome}}</h1>
-     
-      <ion-button size="small" expand="block" fill="clear" color="secondary" (click)="alteraUsuario()">
-        <ion-icon slot="end" name="create"></ion-icon>
-      </ion-button>
- 
+    <h2>{{usuarioLocal.Nome}}</h2>
     <ion-item>
-      <ion-label>
-        <h3> Login: {{usuarioLocal.Login}}</h3>
-      </ion-label>
+      <ion-label> Login: {{usuarioLocal.Login}}</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>
-        <h3> Senha: {{usuarioLocal.Senha}}</h3>
-      </ion-label>
+      <ion-label>Senha: {{usuarioLocal.Senha}}</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>
-        <h3> Endereço: {{usuarioLocal.Endereco}}</h3>
-      </ion-label>
+      <ion-label>Endereço: {{usuarioLocal.Endereco}}</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>
-        <h3> CPF: {{usuarioLocal.CPF}}</h3>
-      </ion-label>
+      <ion-label>CPF: {{usuarioLocal.CPF}}</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>
-        <h3> RG: {{usuarioLocal.RG}}</h3>
-      </ion-label>
+      <ion-label>RG: {{usuarioLocal.RG}}</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>
-        <h3> Telefone: {{usuarioLocal.Telefone}}</h3>
-      </ion-label>
+      <ion-label>Telefone: {{usuarioLocal.Telefone}}</ion-label>
     </ion-item>
-
     <ion-item>
-      <ion-label>
-        <h3> Whatsapp: {{usuarioLocal.Whatsapp}}</h3>
-      </ion-label>
+      <ion-label>Whatsapp: {{usuarioLocal.Whatsapp}}</ion-label>
     </ion-item>
-
-
-
+    <ion-item>
+      <ion-label>Email: {{usuarioLocal.Email}}</ion-label>
+    </ion-item>
   </ion-card>
 </ion-content>

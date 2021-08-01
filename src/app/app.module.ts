@@ -9,8 +9,9 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
-// import { BrMaskerModule } from 'br-mask';
-// import { NgxMaskModule, IConfig } from 'ngx-mask'
+import { NgxMaskIonicModule } from 'ngx-mask-ionic';
+// import { NgxMaskModule, IConfig } from 'ngx-mask';
+// export const options: Partial<IConfig> | (() => Partial<IConfig>) = null;
 
 @NgModule({
   declarations: [AppComponent],
@@ -19,10 +20,9 @@ import { HttpClientModule } from '@angular/common/http';
     BrowserModule,
     HttpClientModule,
     IonicModule.forRoot(),
-    AppRoutingModule
-    // BrMaskerModule
-    // NgxMaskModule.forRoot()
-    
+    AppRoutingModule,
+    NgxMaskIonicModule.forRoot(),
+    // NgxMaskModule.forRoot(),
   ],
   providers: [
     StatusBar,

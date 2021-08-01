@@ -1,11 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-
 import { IonicModule } from '@ionic/angular';
-
 import { ClienteCadastroPage } from './cliente-cadastro.page';
+// import { NgxMaskModule } from 'ngx-mask';
+import { NgxMaskIonicModule } from 'ngx-mask-ionic';
+// import { MaskPipe } from 'ngx-mask';
 
 const routes: Routes = [
   {
@@ -18,9 +19,15 @@ const routes: Routes = [
   imports: [
     CommonModule,
     FormsModule,
+    ReactiveFormsModule,
     IonicModule,
-    RouterModule.forChild(routes)
+    RouterModule.forChild(routes),
+    // NgxMaskModule.forChild(),
+    NgxMaskIonicModule
   ],
-  declarations: [ClienteCadastroPage]
+  declarations: [ClienteCadastroPage],
+  providers: [
+    // MaskPipe
+  ]
 })
 export class ClienteCadastroPageModule {}

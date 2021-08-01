@@ -16,6 +16,7 @@ export class ClientesConsultarPage implements OnInit {
 
   public cliente: any = [];
   public id: number;
+  
   public entidade = 'Cliente';
 
   // tslint:disable-next-line:max-line-length

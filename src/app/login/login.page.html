@@ -1,0 +1,31 @@
+<ion-content class="ion-padding ion-text-center">
+  <ion-card>
+    <ion-img src="/assets/imgs/logoe.png"></ion-img>
+    <ion-card-header>
+      <ion-card-title class="ion-text-center">Aplicativo Epicus Pilates</ion-card-title>
+      <ion-card-subtitle class="ion-text-center">Version 1.0</ion-card-subtitle>
+    </ion-card-header>
+    <ion-card-content>
+      <ion-item>
+        <ion-label floating> Login: </ion-label>
+        <ion-input maxlength="20" placeholder="Digite aqui seu login." type="text" [(ngModel)]="usuario.login">
+        </ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label floating>Senha:</ion-label>
+        <ion-input maxlength="8" placeholder="Digite aqui a sua senha." type="password" [(ngModel)]="usuario.senha">
+        </ion-input>
+      </ion-item>
+      <ion-button strong="true" shape="round" expand="full" fill="outline" color="primary" (click)="fazerLogin()">Login
+        com usuario e
+        senha </ion-button>
+      <ion-button expand="full" icon-left (click)='loginFacebook();'>
+        <ion-icon name="logo-facebook"></ion-icon>Login com Facebook
+      </ion-button>
+      <p>___________ ou ___________</p>
+      <ion-button strong="true" shape="round" expand="full" fill="outline" color="dark" (click)="fazerCadastramento()">
+        Cadastre-se
+      </ion-button>
+    </ion-card-content>
+  </ion-card>
+</ion-content>

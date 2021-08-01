@@ -1,0 +1,19 @@
+.welcome-card img {
+  max-height: 35vh;
+  overflow: hidden;
+}
+
+
+.vertical-align-content
+{
+     display: flex!important;
+     align-content: center!important;
+     align-items: center!important;
+     vertical-align: center!important;
+}
+
+ion-card {
+background: rgba(255,255,255,0.3);
+border-radius: 10px;
+color:  rgba(255,255,0,0.3);
+}

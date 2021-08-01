@@ -1,0 +1,69 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      MEU PERFIL
+    </ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="ngOnInit()">
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div id="header">
+    <img src="/assets/imgs/foto.jpg" />
+  </div>
+
+  <ion-card>
+    <h1>{{usuarioLocal.Nome}}</h1>
+     
+      <ion-button size="small" expand="block" fill="clear" color="secondary" (click)="alteraUsuario()">
+        <ion-icon slot="end" name="create"></ion-icon>
+      </ion-button>
+ 
+    <ion-item>
+      <ion-label>
+        <h3> Login: {{usuarioLocal.Login}}</h3>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <h3> Senha: {{usuarioLocal.Senha}}</h3>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <h3> Endereço: {{usuarioLocal.Endereco}}</h3>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <h3> CPF: {{usuarioLocal.CPF}}</h3>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <h3> RG: {{usuarioLocal.RG}}</h3>
+      </ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>
+        <h3> Telefone: {{usuarioLocal.Telefone}}</h3>
+      </ion-label>
+    </ion-item>
+
+    <ion-item>
+      <ion-label>
+        <h3> Whatsapp: {{usuarioLocal.Whatsapp}}</h3>
+      </ion-label>
+    </ion-item>
+
+
+
+  </ion-card>
+</ion-content>

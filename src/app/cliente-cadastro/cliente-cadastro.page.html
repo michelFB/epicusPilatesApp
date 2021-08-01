@@ -1,0 +1,89 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      CADASTRO CLIENTE
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+
+<ion-content class="ion-padding">
+  <form (ngSubmit)="InserirClientes()">
+    <ion-card>
+       
+
+        <ion-item>
+          <ion-label spellcheck="true">Nome</ion-label>
+          <ion-input type="text" name="cpf" id="cpf" mask="000.000.000-00"></ion-input>
+        </ion-item>
+
+      <ion-item>
+        <ion-label spellcheck="true">Nome</ion-label>
+        <ion-input type="text" name="Nome" [(ngModel)]="cliente.Nome"></ion-input>
+      </ion-item>
+        <ion-item class="ion-activated">
+          <ion-label>CPF</ion-label>
+          <ion-input pattern="000.000.000-00" type="text" name="CPF" [(ngModel)]="cliente.CPF"></ion-input>
+        </ion-item>
+        <ion-item class="ion-activated">
+          <ion-label>RG</ion-label>
+          <ion-input pattern="###.###-##" type="text" name="RG" [(ngModel)]="cliente.RG"></ion-input>
+        </ion-item>
+        <ion-item>
+          <ion-label>Nascimento</ion-label>
+          <ion-datetime name="nascimento" type="date" placeholder="Selecione a data" displayFormat="DD/MM/YYYY"
+            [(ngModel)]="cliente.Nascimento"></ion-datetime>
+        </ion-item>
+      <ion-item>
+        <ion-label>Endereco</ion-label>
+        <ion-input type="text" name="Endereco" [(ngModel)]="cliente.Endereco"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Telefone</ion-label>
+        <ion-input type="text" name="Telefone" [(ngModel)]="cliente.Telefone"></ion-input>
+      </ion-item>
+        <ion-item>
+          <ion-label>Whatsapp</ion-label>
+          <ion-input type="text" name="Whatsapp" [(ngModel)]="cliente.Whatsapp"></ion-input>
+        </ion-item>
+      <ion-item>
+        <ion-label>E-mail</ion-label>
+        <ion-input type="text" name="Email" [(ngModel)]="cliente.Email"></ion-input>
+      </ion-item>
+
+
+      <ion-item>
+        <ion-label>Sexo</ion-label>
+        <ion-select type="text" name="Sexo" [(ngModel)]="cliente.Sexo" placeholder="Selecione o sexo">
+          <ion-select-option value="Masculino">Masculino</ion-select-option>
+          <ion-select-option value="Feminino">Feminino</ion-select-option>
+        </ion-select>
+      </ion-item>
+      <ion-item>
+        <ion-label>Pacote escolhido</ion-label>
+        <ion-select type="number" name="Pacote_idPacote" [(ngModel)]="cliente.Pacote" placeholder="Selecione o Pacote">
+          <ion-select-option *ngFor="let pacote of pacotes">{{pacote.Id}}</ion-select-option>
+        </ion-select>
+      </ion-item>
+      
+
+      <ion-item>
+        <ion-label spellcheck="true" floating>Login</ion-label>
+        <ion-input type="text" name="Login" placeholder="Digite um login de usuário" [(ngModel)]="cliente.Login"></ion-input>
+      </ion-item>
+      
+      <ion-item>
+        <ion-label spellcheck="true" floating>Senha</ion-label>
+        <ion-input type="text" name="Senha" placeholder="Digite uma senha de 8 dígitos" [(ngModel)]="cliente.Senha">
+        </ion-input>
+      </ion-item>
+
+      <ion-button expand="block" fill="solid" type="submit">
+        <ion-icon name="albums"></ion-icon>CADASTRAR
+      </ion-button>
+    </ion-card>
+  </form>
+</ion-content>

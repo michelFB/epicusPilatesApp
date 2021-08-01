@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      AGENDAR HORARIO
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <form (ngSubmit)="CadastrarHorario()">
+    <ion-item>
+      <ion-label>MÊS / ANO</ion-label>
+      <ion-datetime name="mesAno" [(ngModel)]="horarioAgenda.mesAno" displayFormat="MM/YYYY" pickerFormat="MMMM YYYY"
+        yearValues="2020,2022" [yearValues]="customYearValues">
+      </ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>HORÁRIO</ion-label>
+      <ion-datetime name="horario" [(ngModel)]="horarioAgenda.horario" displayFormat="h:mm A" minuteValues="0,15,30,45"></ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>DIA DA SEMANA</ion-label>
+      <ion-select name="diaSemana" [(ngModel)]="horarioAgenda.diaSemana" placeholder="DIA DA SEMANA">
+        <ion-select-option value="0">Segunda</ion-select-option>
+        <ion-select-option value="1">Terça</ion-select-option>
+        <ion-select-option value="2">Quarta</ion-select-option>
+        <ion-select-option value="3">Quinta</ion-select-option>
+        <ion-select-option value="4">Sexta</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-button expand="block" fill="solid" type="submit">
+      <ion-icon name="calendar"></ion-icon>AGENDAR
+    </ion-button>
+  </form>
+</ion-content>

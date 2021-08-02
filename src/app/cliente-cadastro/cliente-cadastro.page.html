@@ -62,7 +62,7 @@
       <ion-item>
         <ion-label position="floating">Pacote escolhido</ion-label>
         <ion-select type="number" name="Pacote_idPacote" [(ngModel)]="cliente.Pacote" placeholder="Selecione o Pacote">
-          <ion-select-option *ngFor="let pacote of pacotes" value="pacote.Id == 1 " selected="1">{{pacote.Id}}</ion-select-option>
+          <ion-select-option *ngFor="let pacote of pacotes" >{{pacote.Id}}</ion-select-option>
         </ion-select>
       </ion-item>
       <ion-title>Dados de Autenticação</ion-title>

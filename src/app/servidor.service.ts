@@ -13,6 +13,8 @@ export class ServidorService {
   
   public urlLocal = 'http://192.168.100.24:82/pilatesApp/';
   // public urlLocal = 'https://espacoepicus.000webhostapp.com/';
+
+
   public API = '';
   usuarioAuxiliar: any = [];
   usuario : Usuario;

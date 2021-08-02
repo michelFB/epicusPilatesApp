@@ -45,7 +45,7 @@ export class PacotesConsultarPage implements OnInit {
 async alertEditar() {
   const alert = await this.alertController.create({
     cssClass: 'my-custom-class',
-    header: 'Novo Pacote',
+    header: 'Alterar Pacote',
     inputs: [
       {
         name: 'descricao',
@@ -88,7 +88,7 @@ async alertEditar() {
       }, {
         text: 'Ok',
         handler: data => {
-          this.pacote = new Pacote(this.pacote.Id, data.descricao, data.aulas, data.periodo, data.valor);
+          this.pacote = new Pacote(this.pacote.Id, data.descricao, data.periodo, data.aulas, data.valor);
           console.log(this.pacote);
           this.servidor.alteraService(this.pacote, this.entidade);
           this.ngOnInit();
@@ -97,7 +97,6 @@ async alertEditar() {
       }
     ]
   });
-
   await alert.present();
 }
 
@@ -147,7 +146,7 @@ async alertEditar() {
           text: 'Ok',
           handler: data => {
             console.log("data",data);
-            this.pacote = new Pacote("",data.descricao, data.aulas, data.periodo,data.valor);
+            this.pacote = new Pacote("", data.descricao, data.periodo, data.aulas, data.valor);
             console.log(this.pacote);
             this.servidor.inserirService(this.pacote, this.entidade);
             this.ngOnInit();

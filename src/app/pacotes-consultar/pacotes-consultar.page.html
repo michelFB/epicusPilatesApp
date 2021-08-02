@@ -23,17 +23,18 @@
   <ion-list *ngFor="let pacote of pacotes; let i = index">
     <ion-item>
       <ion-avatar slot="start">
-      <!-- <ion-img src="{{pacote.Foto}}"></ion-img> -->
-      <ion-img src="/assets/imgs/box.jpg"></ion-img>
+        <!-- <ion-img src="{{pacote.Foto}}"></ion-img> -->
+        <ion-img src="/assets/imgs/box.jpg"></ion-img>
       </ion-avatar>
+
       <ion-label>
-        <h2>{{pacote.Descricao}}</h2>
+        <h4>{{pacote.Descricao}}</h4>
         <p>Período: {{pacote.Periodo}}</p>
         <p>Dias na Semana: {{pacote.Naula}}</p>
         <p>Valor: {{pacote.Valor}}</p>
       </ion-label>
-     
-      <ion-icon name="gift" color="success" slot="end" (click)="EditarPacote(pacote)"></ion-icon>
+  
+      <ion-icon name="refresh" color="success" slot="end" (click)="EditarPacote(pacote)"></ion-icon>
       <ion-icon name="trash" color="danger" slot="end" (click)="DeletaPacote(pacote)"></ion-icon>
     </ion-item>
   </ion-list>

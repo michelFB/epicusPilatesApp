@@ -1,0 +1,40 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      PACOTES
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  <!-- fab placed to the (vertical) center and end -->
+  <ion-fab vertical="top" horizontal="end" slot="fixed">
+    <ion-fab-button size="small">
+      <ion-icon name="add" (click)="AdicionarPacote()"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+
+  <ion-label>
+    <h1>Lista de Pacotes</h1>
+  </ion-label>
+  <ion-searchbar inputmode="numeric"></ion-searchbar>
+  <ion-list *ngFor="let pacote of pacotes; let i = index">
+    <ion-item>
+      <ion-avatar slot="start">
+      <!-- <ion-img src="{{pacote.Foto}}"></ion-img> -->
+      <ion-img src="/assets/imgs/box.jpg"></ion-img>
+      </ion-avatar>
+      <ion-label>
+        <h2>{{pacote.Descricao}}</h2>
+        <p>Período: {{pacote.Periodo}}</p>
+        <p>Dias na Semana: {{pacote.Naula}}</p>
+        <p>Valor: {{pacote.Valor}}</p>
+      </ion-label>
+     
+      <ion-icon name="gift" color="success" slot="end" (click)="EditarPacote(pacote)"></ion-icon>
+      <ion-icon name="trash" color="danger" slot="end" (click)="DeletaPacote(pacote)"></ion-icon>
+    </ion-item>
+  </ion-list>
+</ion-content>

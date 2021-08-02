@@ -26,14 +26,6 @@ export class ClienteCadastroPage implements OnInit {
     private router: Router) {
     this.ConsultarPacotes();
   }
-
-
-
-  // updateWithMask(event) {
-  //   this.ionicForm.controls.cpf.setValue(this.maskPipe.transform(event.currentTarget.value, '000.000.000-00'));
-  // }
-  
-
   InserirClientes() {
     // console.log(this.cliente);
     this.servidor.inserirService(this.cliente, this.entidade);
@@ -57,11 +49,5 @@ export class ClienteCadastroPage implements OnInit {
   }
 
   ngOnInit() {
-  //   this.ionicForm = this.formBuilder.group({
-  //     name: ['', [Validators.required, Validators.minLength(3)]],
-  //     email: ['', [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$')]],
- 
-  //   })
-  //  }
   }
 }

@@ -8,12 +8,12 @@
     <ion-card-content>
       <ion-item>
         <ion-label floating> Login: </ion-label>
-        <ion-input maxlength="20" placeholder="Digite seu login" type="text" [(ngModel)]="usuario.login">
+        <ion-input maxlength="20" value="michelfb" placeholder="Digite seu login" type="text" [(ngModel)]="usuario.login">
         </ion-input>
       </ion-item>
       <ion-item>
         <ion-label floating>Senha:</ion-label>
-        <ion-input maxlength="8" placeholder="Digite sua senha" type="password" [(ngModel)]="usuario.senha">
+        <ion-input maxlength="8" value="1234" placeholder="Digite sua senha" type="password" [(ngModel)]="usuario.senha">
         </ion-input>
       </ion-item>
       <ion-button strong="true" shape="round" expand="full" fill="outline" color="primary" (click)="fazerLogin()">Login

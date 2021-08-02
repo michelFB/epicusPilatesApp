@@ -22,16 +22,6 @@ image: any;
       
   }
 
-
-  // selectedFile(event) {
-  //   this.image = event.target.files[0];
-  // }
-  // onClick(){
-  //   const formData = new FormData();
-  //   formData.append('image', this.image);
-  //   this.servidor.uploadimagem(formData);
-  // }
-
   AlterarUsuario() {
     this.usuarioAlterar = this.usuarioLocal;
     this.alertaAlterar();

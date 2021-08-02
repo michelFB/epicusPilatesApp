@@ -15,6 +15,7 @@ const routes: Routes = [
   // { path: 'pacotes', loadChildren: './pacotes/pacotes.module#PacotesPageModule' },
   // { path: 'horario-consulta', loadChildren: './horario-consulta/horario-consulta.module#HorarioConsultaPageModule' }
   { path: 'cliente-cadastro', loadChildren: './cliente-cadastro/cliente-cadastro.module#ClienteCadastroPageModule' },
+  { path: 'pacotes-consultar', loadChildren: './pacotes-consultar/pacotes-consultar.module#PacotesConsultarPageModule' },
   // { path: 'cliente-consulta', loadChildren: './cliente-consulta/cliente-consulta.module#ClienteConsultaPageModule' },
   // { path: 'cliente-alteracao', loadChildren: './cliente-alteracao/cliente-alteracao.module#ClienteAlteracaoPageModule' },
   // { path: 'pacote', loadChildren: './pacote/pacote.module#PacotePageModule' },

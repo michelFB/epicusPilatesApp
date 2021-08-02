@@ -24,6 +24,9 @@ export class HomePage implements OnInit {
   fisios() {
     this.router.navigate(['/evento']);
   }
+  pacotes() {
+    this.router.navigate(['/pacotes-consultar']);
+  }
   pagamentos() {
     this.router.navigate(['/evento']);
   }

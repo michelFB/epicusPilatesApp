@@ -16,7 +16,6 @@ export class ClientesConsultarPage implements OnInit {
 
   public cliente: any = [];
   public id: number;
-  
   public entidade = 'Cliente';
 
   // tslint:disable-next-line:max-line-length
@@ -65,30 +64,31 @@ export class ClientesConsultarPage implements OnInit {
 
   DeletaCliente(cliente) {
     this.id = cliente.CPF;
-    // this.alertaDeletar();
+    this.alertaDeletar();
   }
 
-  // async alertaDeletar() {
-  //   const alert = await this.alertController.create({
-  //     message: 'Tem certeza que deseja excluir esse <strong>cliente</strong>?',
-  //     buttons: [
-  //       {
-  //         text: 'Cancelar',
-  //         role: 'cancel',
-  //         cssClass: 'secondary',
-  //         handler: (blah) => {
-  //         }
-  //       }, {
-  //         text: 'Confirmar',
-  //         handler: () => {
-  //           this.servidor.deletarService(this.id, this.entidade);
-  //           this.ngOnInit();
-  //         }
-  //       }
-  //     ]
-  //   });
-  //   await alert.present();
-  // }
+  async alertaDeletar() {
+    const alert = await this.alertController.create({
+      message: 'Tem certeza que deseja excluir esse <strong>cliente</strong>?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+          }
+        }, {
+          text: 'Confirmar',
+          handler: () => {
+            this.servidor.deletarService(this.id, this.entidade);
+            this.ngOnInit();
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
   async presentLoading() {
     const loading = await this.loadingController.create({
       message: 'Aguarde!',

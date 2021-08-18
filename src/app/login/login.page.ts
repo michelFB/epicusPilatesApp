@@ -18,6 +18,7 @@ import { Usuario } from '../models/usuario';
 export class LoginPage implements OnInit {
 
   public usuario: any = {};
+  usuarioAuxiliar: any = [];
 
   constructor(public loadingController: LoadingController, public servidor: ServidorService,
     public alertController: AlertController, private route: ActivatedRoute,
@@ -30,9 +31,20 @@ export class LoginPage implements OnInit {
       login: this.usuario.login,
       senha: this.usuario.senha
     };
-    if (this.servidor.LoginUsuarioService(autentica)) {
-      this.presentToast('usuario não cadastrado');
-    }
+  
+    this.servidor.LoginUsuarioService(autentica)
+      .subscribe(data => {       
+        this.usuarioAuxiliar = data;
+        this.servidor.usuario = this.usuarioAuxiliar;  
+        console.log(this.servidor.usuario);
+        console.log('Usuario encontrado, Logando com Sucesso!! ');
+        this.router.navigate(['/home']);
+      }, error => {
+        console.log(error);
+        console.log('Usuario não encontrado!!! ');
+        this.presentToast("Usuario não encontrado!");
+      });
+    
   }
   // CADASTRAMENTO 
   fazerCadastramento() {

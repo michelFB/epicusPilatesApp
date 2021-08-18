@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServidorService } from '../servidor.service';
-import { ActivatedRoute, Router } from '@angular/router'
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 
 @Component({
   selector: 'app-cliente-horario',
@@ -18,7 +19,7 @@ export class ClienteHorarioPage implements OnInit {
   alunoSelecionado: any;
 
 
-  constructor(public servidor: ServidorService, private route: ActivatedRoute, private router: Router) {
+  constructor(public servidor: ServidorService, private route: ActivatedRoute, private router: Router, public toastController: ToastController) {
     this.route.queryParams.subscribe(params => {
       if (params && params.special) {
         this.alunoSelecionado = JSON.parse(params.special);
@@ -39,8 +40,19 @@ export class ClienteHorarioPage implements OnInit {
     };
     console.log(dados);
     this.servidor.MarcacaoClienteMesSemana(dados, this.entidade);
+    this.presentToast('Marcação Realizada com Sucesso!!');
     this.ngOnInit();
   }
+
+  //MENSAGEM NA TELA
+  async presentToast(mensagem) {
+    const toast = await this.toastController.create({
+      message: mensagem,
+      duration: 2000,
+    });
+    toast.present();
+  }
+
 
   ngOnInit() {
   }

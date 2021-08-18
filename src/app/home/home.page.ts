@@ -12,7 +12,6 @@ export class HomePage implements OnInit {
 
   
   constructor(public servidor: ServidorService, private router: Router) {
-    //  this.servidor.usuario;
   }
 
   agenda(){
@@ -22,7 +21,7 @@ export class HomePage implements OnInit {
     this.router.navigate(['/clientes-consultar']);
   }
   fisios() {
-    this.router.navigate(['/evento']);
+    this.router.navigate(['/fisio-consultar']);
   }
   pacotes() {
     this.router.navigate(['/pacotes-consultar']);

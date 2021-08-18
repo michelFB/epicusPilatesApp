@@ -1,73 +1,66 @@
+import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
-import { Component, ViewChild, OnInit } from '@angular/core';
 import { LoadingController } from '@ionic/angular';
 import { ServidorService } from './../servidor.service';
 import { NavigationExtras } from '@angular/router';
 import { NavController } from '@ionic/angular';
 
-@Component({
-  selector: 'app-clientes-consultar',
-  templateUrl: './clientes-consultar.page.html',
-  styleUrls: ['./clientes-consultar.page.scss'],
-})
-export class ClientesConsultarPage implements OnInit {
 
-  public cliente: any = [];
+@Component({
+  selector: 'app-fisio-consultar',
+  templateUrl: './fisio-consultar.page.html',
+  styleUrls: ['./fisio-consultar.page.scss'],
+})
+export class FisioConsultarPage implements OnInit {
+
+  public Fisio: any = [];
   public id: number;
-  public entidade = 'Cliente';
+  public entidade = 'Fisio';
 
   // tslint:disable-next-line:max-line-length
-  constructor(public loadingController: LoadingController, public servidor: ServidorService,
+  constructor(
+    public loadingController: LoadingController,
+    public servidor: ServidorService,
     public alertController: AlertController,
-    private router: Router, public navCtrl: NavController) {
-    this.ConsultarClientes();
+    private router: Router,
+    public navCtrl: NavController) {
+    this.ConsultarFisios();
   }
 
-  AdicionarCliente(){
-    this.router.navigate(['/cliente-cadastro']);
+  AdicionarFisio() {
+    this.router.navigate(['/fisio-cadastro']);
   }
 
-   ConsultarClientes() {
+  ConsultarFisios() {
     this.servidor.consultarService(this.entidade)
       .subscribe(
         (data) => {
-          this.cliente = data;
-          console.log('Consultando os clientes', data);
+          this.Fisio = data;
+          console.log('Consultando as Fisios', data);
         },
         (err) => {
           console.log(err);
         });
   }
 
-  HorarioCliente(clienteSelecionado) {
-    let navigationExtras: NavigationExtras = {
-      queryParams: {
-        special: JSON.stringify(clienteSelecionado),
-      }
-    };
-    this.router.navigate(['/cliente-horario'], navigationExtras);
-    // this.navCtrl.navigateForward(['cliente-horario'], navigationExtras);
+  HorarioFisio(FisioSelecionado) {
+    // let navigationExtras: NavigationExtras = {
+    //   queryParams: {
+    //     special: JSON.stringify(FisioSelecionado),
+    //   }
+    // };
+    // this.router.navigate(['/Fisio-horario'], navigationExtras);
+   }
 
-  }
-
-  Anaminese(clienteSelecionado) {
-    const navigationExtras: NavigationExtras = {
-      queryParams: {
-        special: JSON.stringify(clienteSelecionado)
-      }
-    };
-    this.router.navigate(['/cliente-anaminese'], navigationExtras);
-  }
-
-  DeletaCliente(cliente) {
-    this.id = cliente.IDCliente;
+  DeletaFisio(Fisio) {
+    this.id = Fisio.CPF;
     this.alertaDeletar();
   }
 
   async alertaDeletar() {
     const alert = await this.alertController.create({
-      message: 'Tem certeza que deseja excluir esse <strong>cliente</strong>?',
+      message: 'Tem certeza que deseja excluir esse <strong>Fisio</strong>?',
       buttons: [
         {
           text: 'Cancelar',
@@ -99,9 +92,8 @@ export class ClientesConsultarPage implements OnInit {
 
 
   ngOnInit() {
-    this.ConsultarClientes();
+    this.ConsultarFisios();
     // this.presentLoading()
   }
 
- 
 }

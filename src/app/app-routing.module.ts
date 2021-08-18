@@ -16,6 +16,9 @@ const routes: Routes = [
   // { path: 'horario-consulta', loadChildren: './horario-consulta/horario-consulta.module#HorarioConsultaPageModule' }
   { path: 'cliente-cadastro', loadChildren: './cliente-cadastro/cliente-cadastro.module#ClienteCadastroPageModule' },
   { path: 'pacotes-consultar', loadChildren: './pacotes-consultar/pacotes-consultar.module#PacotesConsultarPageModule' },
+  { path: 'fisio-consultar', loadChildren: './fisio-consultar/fisio-consultar.module#FisioConsultarPageModule' },
+  { path: 'fisio-cadastro', loadChildren: './fisio-cadastro/fisio-cadastro.module#FisioCadastroPageModule' },
+  { path: 'usuario-alterar-senha', loadChildren: './usuario-alterar-senha/usuario-alterar-senha.module#UsuarioAlterarSenhaPageModule' },
   // { path: 'cliente-consulta', loadChildren: './cliente-consulta/cliente-consulta.module#ClienteConsultaPageModule' },
   // { path: 'cliente-alteracao', loadChildren: './cliente-alteracao/cliente-alteracao.module#ClienteAlteracaoPageModule' },
   // { path: 'pacote', loadChildren: './pacote/pacote.module#PacotePageModule' },

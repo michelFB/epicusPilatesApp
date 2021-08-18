@@ -11,72 +11,85 @@
 
 <ion-content>
   <ion-card>
-    <form (ngSubmit)="InserirClientes()" novalidate>
+    <form [formGroup]="formCadCliente" (ngSubmit)="InserirClientes()">
       <ion-item>
         <ion-label position="floating">Nome</ion-label>
-        <ion-input placeholder="Digite seu nome completo" type="text" name="Nome" [(ngModel)]="cliente.Nome">
+        <ion-input formControlName="Nome" placeholder="Digite seu nome completo" type="text">
         </ion-input>
       </ion-item>
+      
+      <div *ngIf="formCadCliente.controls.Nome.errors" style="color: red;">
+        <p *ngIf="formCadCliente.controls.Nome.errors.required"><small>Campo obrigatório</small></p>
+      </div>
+
       <ion-item class="ion-activated">
         <ion-label position="floating">CPF</ion-label>
-        <ion-input placeholder="000.000.00-00" mask="000.000.000-00" type="text" name="CPF" [(ngModel)]="cliente.CPF">
+        <ion-input formControlName="CPF" placeholder="000.000.00-00" mask="000.000.000-00" type="text">
         </ion-input>
       </ion-item>
+      <div *ngIf="formCadCliente.controls.CPF.errors" style="color: red;">
+        <p *ngIf="formCadCliente.controls.CPF.errors.required"><small>Campo obrigatório</small></p>
+      </div>
+
       <ion-item class="ion-activated">
         <ion-label position="floating">RG</ion-label>
-        <ion-input placeholder="000.000.00-00" mask="000.000.00-00" type="text" name="RG" [(ngModel)]="cliente.RG">
+        <ion-input formControlName="RG" placeholder="000.000.00-00" mask="000.000.00-00" type="text">
         </ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Nascimento</ion-label>
-        <ion-datetime name="nascimento" type="date" placeholder="Selecione sua data de nascimento"
-          displayFormat="DD/MM/YYYY" [(ngModel)]="cliente.Nascimento"></ion-datetime>
+        <ion-datetime formControlName="Nascimento" type="date" placeholder="Selecione sua data de nascimento"
+          displayFormat="DD/MM/YYYY"></ion-datetime>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Endereco</ion-label>
-        <ion-input placeholder="Informe seu Endereço" type="text" name="Endereco" [(ngModel)]="cliente.Endereco">
+        <ion-input formControlName="Endereco" placeholder="Informe seu Endereço" type="text">
         </ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Telefone</ion-label>
-        <ion-input placeholder="(000) 00000-0000" mask="(000) 00000-0000" maxlength="16" type="text" name="Telefone"
-          [(ngModel)]="cliente.Telefone"></ion-input>
+        <ion-input formControlName="Telefone" placeholder="(000) 00000-0000" mask="(000) 00000-0000" maxlength="16"
+          type="text"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Whatsapp</ion-label>
-        <ion-input placeholder="(000) 00000-0000" mask="(000) 00000-0000" type="text" name="Whatsapp"
-          [(ngModel)]="cliente.Whatsapp"></ion-input>
+        <ion-input formControlName="Whatsapp" placeholder="(000) 00000-0000" mask="(000) 00000-0000" type="text">
+        </ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">E-mail</ion-label>
-        <ion-input placeholder="seuemail@provedor.com" mask="A*@A*.S*" [dropSpecialCharacters]="false" type="text"
-          name="Email" [(ngModel)]="cliente.Email"></ion-input>
+        <ion-input formControlName="Email" placeholder="seuemail@provedor.com" mask="A*@A*.S*"
+          [dropSpecialCharacters]="false" type="text"></ion-input>
       </ion-item>
-      <!-- <ion-item>
-      <ion-label position="floating">Sexo</ion-label>
-      <ion-select type="text" name="Sexo" [(ngModel)]="cliente.Sexo" placeholder="Selecione o sexo">
-        <ion-select-option value="Masculino">Masculino</ion-select-option>
-        <ion-select-option value="Feminino">Feminino</ion-select-option>
-      </ion-select>
-    </ion-item> -->
       <ion-item>
         <ion-label position="floating">Pacote escolhido</ion-label>
-        <ion-select type="number" name="Pacote_idPacote" [(ngModel)]="cliente.Pacote" placeholder="Selecione o Pacote">
-          <ion-select-option *ngFor="let pacote of pacotes" >{{pacote.Id}}</ion-select-option>
+        <ion-select formControlName="Pacote" type="number" placeholder="Selecione o Pacote">
+          <ion-select-option *ngFor="let pacote of pacotes">{{pacote.Id}}</ion-select-option>
         </ion-select>
       </ion-item>
-      <ion-title>Dados de Autenticação</ion-title>
+      <div *ngIf="formCadCliente.controls.Pacote.errors" style="color: red;">
+        <p *ngIf="formCadCliente.controls.Pacote.errors.required"><small>Campo obrigatório</small></p>
+      </div>
+      <h2 style=" text-align: center">Dados de Autenticação</h2>
       <ion-item>
         <ion-label position="floating">Login</ion-label>
-        <ion-input type="text" name="Login" placeholder="Digite um login de usuário" [(ngModel)]="cliente.Login">
+        <ion-input formControlName="Login" type="text" placeholder="Digite um login de usuário">
         </ion-input>
       </ion-item>
+      <div *ngIf="formCadCliente.controls.Login.errors" style="color: red;">
+        <p *ngIf="formCadCliente.controls.Login.errors.required"><small>Campo obrigatório</small></p>
+      </div>
+
       <ion-item>
         <ion-label position="floating">Senha</ion-label>
-        <ion-input type="text" name="Senha" placeholder="Digite uma senha de 8 dígitos" [(ngModel)]="cliente.Senha">
+        <ion-input formControlName="Senha" type="text" placeholder="Digite uma senha de 8 dígitos">
         </ion-input>
       </ion-item>
-      <ion-button expand="block" fill="solid" type="submit">
+      <div *ngIf="formCadCliente.controls.Senha.errors" style="color: red;">
+        <p *ngIf="formCadCliente.controls.Senha.errors.required"><small>Campo obrigatório</small></p>
+      </div>
+
+      <ion-button expand="block" fill="solid" type="submit" [disabled]="!formCadCliente.valid">
         <ion-icon name="albums"></ion-icon>CADASTRAR
       </ion-button>
     </form>

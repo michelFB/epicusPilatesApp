@@ -11,3 +11,24 @@
 ion-content {
     // --background: url('/assets/imgs/fundo2.png') no-repeat 100% 100%;  
 }
+
+.botao{
+    background: blue;
+    width: 150px;
+    height: 100px;
+    position: relative;
+    border-radius: 100%;
+    text-align: center;
+}
+
+.icon {
+    position: absolute;
+    top: 20%;
+    left: 50%;
+    height: 50%;
+    transform: translate(-50%, -50%);
+    width: 30px;
+    height: 30px;
+    // display: block;
+    // text-align: center;
+}

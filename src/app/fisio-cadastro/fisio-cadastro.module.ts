@@ -3,16 +3,16 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
-import { ClienteCadastroPage } from './cliente-cadastro.page';
+import { FisioCadastroPage } from './fisio-cadastro.page';
 import { NgxMaskIonicModule } from 'ngx-mask-ionic';
-
 
 const routes: Routes = [
   {
     path: '',
-    component: ClienteCadastroPage
+    component: FisioCadastroPage
   }
 ];
+
 @NgModule({
   imports: [
     CommonModule,
@@ -22,9 +22,9 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     NgxMaskIonicModule
   ],
-  declarations: [ClienteCadastroPage],
+  declarations: [FisioCadastroPage],
   providers: [
     // MaskPipe
   ]
 })
-export class ClienteCadastroPageModule {}
+export class FisioCadastroPageModule {}

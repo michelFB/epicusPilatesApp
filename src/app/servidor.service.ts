@@ -16,7 +16,6 @@ export class ServidorService {
 
 
   public API = '';
-  usuarioAuxiliar: any = [];
   usuario : Usuario;
   public listausuarios = [];
 
@@ -29,17 +28,6 @@ export class ServidorService {
   LoginUsuarioService(parans): any {
     const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
     return this.http.post(this.urlLocal + 'API_loginUsuarios.php', parans, { headers })
-      .subscribe(data => {       
-        this.usuarioAuxiliar = data;
-        this.usuario = this.usuarioAuxiliar;  
-        console.log(this.usuario);
-        if (data) {
-          console.log('Usuario encontrado, Logando com Sucesso!! ');
-          this.router.navigate(['/home']);
-        } 
-      }, error => {
-        console.log(error);
-      });
   }
 
   rotaService(entidade) {
@@ -48,8 +36,8 @@ export class ServidorService {
       case 'Cliente': { this.API = 'API_Cliente.php'; break; }
       case 'Usuario': { this.API = 'API_Usuario.php'; break; }
       case 'Evento': { this.API = 'API_Evento.php'; break; }
-      case 'Pacote': { this.API = 'API_Pacote.php'; break; }
-
+      case 'Pacote': { this.API = 'API_Pacote.php'; break;}
+      case 'Fisio': { this.API = 'API_Fisio.php'; break;}   
     }
   }
 
@@ -76,8 +64,7 @@ export class ServidorService {
     const JsonDados: any = { key: 'select', dados:'' };
     console.log('Json CONSULTAR', JsonDados);
     const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
-    return this.http.post(this.urlLocal + this.API, JsonDados, { headers }); //retorna o Json da API
-    
+    return this.http.post(this.urlLocal + this.API, JsonDados, { headers }); //retorna o Json da API 
   }
 
   //DELETE
@@ -145,11 +132,45 @@ export class ServidorService {
   verificaReposicao(entidade){
     this.rotaService(entidade);
     const id = this.usuario.ID;
-    const JsonDados: any = { key: 'reposicao', dados: id };
+    const JsonDados: any = { key: 'verificaReposicao', dados: id };
     console.log('Json Consultar Reposicao', JsonDados);
     const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
     return this.http.post(this.urlLocal + this.API, JsonDados, { headers }); //retorna o Json da API
   }
+
+  VerificaCancelamento(entidade) {
+    this.rotaService(entidade);
+    const id = this.usuario.ID;
+    const JsonDados: any = { key: 'VerificaCancelamento', dados: id };
+    console.log('Json Consultar Reposicao', JsonDados);
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    return this.http.post(this.urlLocal + this.API, JsonDados, { headers }); //retorna o Json da API
+  }
+
+  //REPOSIÇÃO DE CLIENTE
+  EfetuarReposicao(dados, entidade) {
+    this.rotaService(entidade);
+    console.log(dados);
+    const JsonDados: any = { key: 'MarcarReposicao', dados };
+    console.log('Json de criar: ', JsonDados);
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    this.http.post(this.urlLocal + this.API, JsonDados, { headers })
+      .subscribe(data => {
+        console.log(data);
+      }, error => {
+        console.log(error);
+      });
+  }
+
+  checaDiaReposto(dados, entidade) {
+    this.rotaService(entidade);
+    const id = this.usuario.ID;
+    const JsonDados: any = { key: 'checaDiaReposto', dados };
+    console.log('Json Consultar Reposicao', JsonDados);
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    return this.http.post(this.urlLocal + this.API, JsonDados, { headers }); //retorna o Json da API
+  }
+
 
   // uploadimagem(image){
   //   const JsonDados =  image;

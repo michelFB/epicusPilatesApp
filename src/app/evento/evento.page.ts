@@ -6,6 +6,8 @@ import { formatDate } from '@angular/common';
 import { ServidorService } from '../servidor.service';
 import { LoadingController } from '@ionic/angular';
 import { Evento } from '../models/evento';
+import { ToastController } from '@ionic/angular';
+
 
 @Component({
   selector: 'app-evento',
@@ -26,33 +28,89 @@ export class EventoPage implements OnInit {
   entidade = 'Evento';
   entidade2 = 'usuario';
   buttonDisabled: boolean;
+  numRep = 0;
+  numCancelamento = 0
   opcaoEventos: string = "minhas_aulas";
 
 
   constructor(public loadingController: LoadingController, public servidor: ServidorService,
-    private alertCtrl: AlertController, @Inject(LOCALE_ID) private locale: string) {
-   
+    private alertCtrl: AlertController,
+    public toastController: ToastController, @Inject(LOCALE_ID) private locale: string) {
+
   }
 
   // Cria um evento atraves do card****************************************************
 
   VerificaRep() {
     this.servidor.verificaReposicao(this.entidade)
-    .subscribe(
-      (data: any) => {
-      // console.log(data);
-      // console.log(data.Flag);
-      if (parseInt(data.Flag)) {
-        this.buttonDisabled = true;
-      } else {
-        this.buttonDisabled = false;
-      };
-
-
-    }, error => {
-      console.log(error);
-    });
+      .subscribe(
+        (data: any) => {
+          // console.log(data);
+          // console.log(data.Flag);
+          this.numRep = data.Qtdd;
+          if (parseInt(data.Flag)) {
+            this.buttonDisabled = true;
+          } else {
+            this.buttonDisabled = false;
+          };
+        }, error => {
+          console.log(error);
+        });
   }
+
+  VerificaCancelamento() {
+    this.servidor.VerificaCancelamento(this.entidade)
+      .subscribe(
+        (data: any) => {
+          console.log(data);
+          this.numCancelamento = data.Qtdd;
+        }, error => {
+          console.log(error);
+        });
+  }
+
+  // Verifica se o dia selecionado já foi reposto, impedindo de cancelar
+  checaDiaCancelamento(dia) {
+    var data = new Date();
+    var hoje = formatDate(data, 'yyyy-MM-dd HH:mm:ss', this.locale);
+    var ultimoDia = new Date(data.getFullYear(), data.getMonth() + 1, 0);
+    var ultimoDiaMes = formatDate(ultimoDia, 'yyyy-MM-dd HH:mm:ss', this.locale);
+        console.log("Hoje ", hoje)
+    this.servidor.checaDiaReposto(dia, this.entidade)
+      .subscribe(
+        (data: any) => {
+          // console.log(data.Flag);
+          if (parseInt(data.Flag)) {
+            this.presentToast("Não é permitido Cancelamento de dias marcados como Reposição!");
+          } else if (dia < hoje) {
+            this.presentToast("Não é permitido Cancelamento de dias anteriores a data atual!");
+          } else if (this.numCancelamento > 1) {
+            this.presentToast("Numero máximo de Cancelamentos do mês atingido!");
+          }
+          else if (dia > ultimoDiaMes) {
+          this.presentToast("Não é permitido Cancelamento de dias fora do mês atual!");
+        }
+          else { this.servidor.deletarService(dia, this.entidade); };
+        }, error => {
+          console.log(error);
+        });
+  }
+
+  // Verifica se o dia selecionado já foi reposto, impedindo de cancelar
+  checaDiaReposicao(dados) {
+    var data = new Date();
+    var hoje = formatDate(data, 'yyyy-MM-dd HH:mm:ss', this.locale);
+    var maisUmMes = data.setDate(data.getDate() + 30);
+    var UmMes = formatDate(maisUmMes, 'yyyy-MM-dd HH:mm:ss', this.locale);
+    if (dados.DataHora < hoje) {
+      this.presentToast("Não é permitido Marcar Reposição de dias anteriores a data atual!");
+    } else if (dados.DataHora > UmMes) {
+      this.presentToast("Não é permitido Marcar Reposição para dias superiores a 1 mês da data atual!");
+    }
+    else { this.servidor.EfetuarReposicao(dados, this.entidade); };
+
+  }
+
 
   InserirEvento() {
     const selected = new Date(this.event.startTime);
@@ -67,6 +125,7 @@ export class EventoPage implements OnInit {
     this.ngOnInit();
   }
 
+  // Consulta todas as aulas para Reposição *************************************************
   ConsultarTodasAulas() {
     this.opcaoEventos = "reposicao";
     this.servidor.consultarHorarios(this.entidade)
@@ -80,7 +139,7 @@ export class EventoPage implements OnInit {
             selected.setHours(selected.getHours() + 1);
             const endTime = (selected.toISOString())
             const eventAtual = new Evento("", "", "", selected, selected, "");
-            if (data[i].HorVagas == 0) {
+            if (data[i].HorVagas == 0 || data[i].HorVagas == 3) {
               eventAtual.id = "";
               eventAtual.title = "INDISPONIVEL";
               eventAtual.startTime = new Date(startTime);
@@ -157,37 +216,71 @@ export class EventoPage implements OnInit {
 
   // Evento de seleção de um Horário
   async onEventSelected(event) {
-    // Use Angular date pipe for conversion
     const start = formatDate(event.startTime, 'yyyy-MM-dd HH:mm:ss', this.locale);
     const end = formatDate(event.endTime, 'yyyy-MM-dd', this.locale);
-    const alert = await this.alertCtrl.create({
-      header: "DESEJA CANCELAR ESTA AULA? ",
-      // subHeader: 'Início: ' + start + '<br><br>Fim: ' + end,
-      message: "Desta Forma você não perderá sua aula e poderá remarcá- la nos próximos 14 Dias",
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'excluir',
-          cssClass: 'secondary',
-          handler: () => {
-            this.servidor.deletarService(start, this.entidade);
-            this.ngOnInit();
+
+    // SE O USUARIO SELECIONOU UM HORARIO NA TELA DE "MINHAS AULAS"
+    if (this.opcaoEventos == "minhas_aulas") {
+
+      const alert = await this.alertCtrl.create({
+        header: "DESEJA CANCELAR ESTA AULA? ",
+        message: "Desta Forma você não perderá sua aula e poderá "
+          + "remarcá-la até o prazo máximo de 1 mês apartir desta data.",
+        buttons: [
+          {
+            text: 'Cancelar',
+            role: 'excluir',
+            cssClass: 'secondary',
+            handler: () => {
+              this.checaDiaCancelamento(start);
+              // this.servidor.deletarService(start, this.entidade);
+              this.ngOnInit();
+            }
+          }, {
+            text: 'Voltar',
+            handler: (blah) => {
+            }
           }
-        }, {
-          text: 'Voltar',
-          handler: (blah) => {
+        ]
+      });
+      alert.present();
+    } else
+    // CASO CONTRÁRIO O USUARIO SELECIONOU UM HORARIO NA TELA DE "REPOSIÇÃO"
+    {
+      const dados = {
+        IDCliente: this.servidor.usuario.ID,
+        DataHora: start
+      }; // DADOS ARA REPOSIÇÃO
+
+      const alert = await this.alertCtrl.create({
+        header: "DESEJA MARCAR ESTA AULA COMO REPOSIÇÃO? ",
+        message: "Desta Forma você não perderá suas reposições.",
+        buttons: [
+          {
+            text: 'Marcar',
+            role: 'Marcar',
+            cssClass: 'secondary',
+            handler: () => {
+              this.checaDiaReposicao(dados);
+              // this.servidor.EfetuarReposicao(dados, this.entidade);
+              this.ngOnInit();
+            }
+          }, {
+            text: 'Voltar',
+            handler: (blah) => {
+            }
           }
-        }
-      ]
-    });
-    alert.present();
+        ]
+      });
+      alert.present();
+    }
   }
 
   // Evento chamado ao clicar no calendário - Atualiza StartTime e EndTime
   onTimeSelected(ev) {
     const selected = new Date(ev.selectedTime);
     this.event.startTime = selected;
-    console.log("Data atual: ", this.event.startTime);
+    // console.log("Data atual: ", this.event.startTime);
     selected.setHours(selected.getHours() + 1);
     this.event.endTime = selected;
   }
@@ -207,11 +300,21 @@ export class EventoPage implements OnInit {
     console.log('Loading dismissed!');
   }
 
+  //MENSAGEM NA TELA
+  async presentToast(mensagem) {
+    const toast = await this.toastController.create({
+      message: mensagem,
+      duration: 2000,
+    });
+    toast.present();
+  }
+
   ngOnInit() {
     this.resetEvent();
     this.ConsultarEvento();
     this.presentLoading();
     this.VerificaRep();
+    this.VerificaCancelamento();
     console.log('Página de Eventos Carregada!');
   }
 }

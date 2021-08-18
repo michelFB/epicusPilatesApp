@@ -20,27 +20,17 @@ export class AppComponent {
       url: '/perfil',
       icon: 'person'
     },
-    // {
-    //   title: 'HORÁRIOS',
-    //   url: '/evento',
-    //   icon: 'calendar'
-    // },
+    {
+      title: 'Alterar Senha',
+      url: '/usuario-alterar-senha',
+      icon: 'key'
+    },
+
     {
       title: 'Sair',
       url: '/login',
       icon: 'exit'
     },
-    // {
-    //   title: 'CLIENTES',
-    //   url: '/clientes-consultar',
-    //   icon: 'person'
-    // },
-
-    // {
-    //   title: 'PACOTES',
-    //   url: '/pacote',
-    //   icon: 'cart'
-    // },
 
 
 

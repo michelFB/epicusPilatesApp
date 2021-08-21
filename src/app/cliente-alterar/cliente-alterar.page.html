@@ -4,7 +4,7 @@
       <ion-back-button defaultHref="home"></ion-back-button>
     </ion-buttons>
     <ion-title>
-      EDITAR PERFIL
+      Atualizar Dados dos Clientes 
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -50,29 +50,29 @@
       </ion-item>
       <ion-item>
         <ion-label position="floating">Endereco</ion-label>
-        <ion-input formControlName="Endereco"  placeholder="Informe seu Endereço" type="text">
+        <ion-input formControlName="Endereco" placeholder="Informe seu Endereço" type="text">
         </ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Telefone</ion-label>
-        <ion-input formControlName="Telefone"  placeholder="(000) 00000-0000" mask="(000) 00000-0000" maxlength="16"
+        <ion-input formControlName="Telefone" placeholder="(000) 00000-0000" mask="(000) 00000-0000" maxlength="16"
           type="text"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Whatsapp</ion-label>
-        <ion-input formControlName="Whatsapp"  placeholder="(000) 00000-0000" mask="(000) 00000-0000" type="text">
+        <ion-input formControlName="Whatsapp" placeholder="(000) 00000-0000" mask="(000) 00000-0000" type="text">
         </ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">E-mail</ion-label>
-        <ion-input formControlName="Email"  placeholder="seuemail@provedor.com" mask="A*@A*.S*"
+        <ion-input formControlName="Email" placeholder="seuemail@provedor.com" mask="A*@A*.S*"
           [dropSpecialCharacters]="false" type="text"></ion-input>
       </ion-item>
 
       <h2 style=" text-align: center">Dados de Autenticação</h2>
       <ion-item>
         <ion-label position="floating">Login</ion-label>
-        <ion-input formControlName="Login"  type="text" placeholder="Digite um login de usuário">
+        <ion-input formControlName="Login" type="text" placeholder="Digite um login de usuário">
         </ion-input>
       </ion-item>
       <div *ngIf="formCadCliente.controls.Login.errors" style="color: red;">
@@ -81,7 +81,7 @@
 
       <ion-item>
         <ion-label position="floating">Senha</ion-label>
-        <ion-input formControlName="Senha"  type="text" placeholder="Digite uma senha de 8 dígitos">
+        <ion-input formControlName="Senha" type="text" placeholder="Digite uma senha de 8 dígitos">
         </ion-input>
       </ion-item>
       <div *ngIf="formCadCliente.controls.Senha.errors" style="color: red;">

@@ -1,10 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ServidorService } from './../servidor.service';
 import { AlertController } from '@ionic/angular';
-import { Router, ActivatedRoute } from '@angular/router';
-import { ElementRef } from '@angular/core/src/linker/element_ref';
 import { LoadingController } from '@ionic/angular';
-import { NavigationExtras } from '@angular/router';
 import { NavController } from '@ionic/angular';
 import { Pacote } from '../models/pacote';
 
@@ -22,9 +19,9 @@ export class PacotesConsultarPage implements OnInit {
   public id: number;
 
   constructor(public loadingController: LoadingController, public servidor: ServidorService,
-    private alertController: AlertController, private route: ActivatedRoute,
-    private router: Router, public navCtrl: NavController) { }
+    private alertController: AlertController, public navCtrl: NavController) { 
 
+    }
 
   ConsultarPacotes() {
     this.servidor.consultarService(this.entidade)
@@ -83,7 +80,6 @@ async alertEditar() {
         role: 'cancel',
         cssClass: 'secondary',
         handler: () => {
-          console.log('Confirm Cancel');
         }
       }, {
         text: 'Ok',
@@ -146,7 +142,7 @@ async alertEditar() {
           text: 'Ok',
           handler: data => {
             console.log("data",data);
-            this.pacote = new Pacote("", data.descricao, data.periodo, data.aulas, data.valor);
+            this.pacote = new Pacote(0, data.descricao, data.aulas, data.periodo, data.valor);
             console.log(this.pacote);
             this.servidor.inserirService(this.pacote, this.entidade);
             this.ngOnInit();

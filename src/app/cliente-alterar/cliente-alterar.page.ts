@@ -1,3 +1,4 @@
+import { Cliente } from './../models/cliente';
 import { Component, OnInit } from '@angular/core';
 import { Usuario } from './../models/usuario';
 import { ServidorService } from './../servidor.service';
@@ -6,40 +7,35 @@ import { AlertController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
-
 @Component({
-  selector: 'app-editar-perfil',
-  templateUrl: './editar-perfil.page.html',
-  styleUrls: ['./editar-perfil.page.scss'],
+  selector: 'app-cliente-alterar',
+  templateUrl: './cliente-alterar.page.html',
+  styleUrls: ['./cliente-alterar.page.scss'],
 })
-export class EditarPerfilPage implements OnInit {
+export class ClienteAlterarPage implements OnInit {
   public usuarioAlterar: any = {};
-  public entidade = 'Usuario';
+  public entidade = 'Cliente';
   image: any;
   public formCadCliente: FormGroup;
+  public alunoSelecionado: any = {};
 
   constructor(public servidor: ServidorService,
     public loadingController: LoadingController,
     public alertController: AlertController,
     public formBuilder: FormBuilder,
+    private route: ActivatedRoute,
     private router: Router) {
-    this.formCadCliente = this.formBuilder.group({
-      'ID': [this.servidor.usuario.ID],
-      'Nome': [this.servidor.usuario.Nome, Validators.compose([Validators.required])],
-      'CPF': [this.servidor.usuario.CPF, Validators.compose([Validators.required])],
-      'RG': [this.servidor.usuario.RG],
-      'Nascimento': [this.servidor.usuario.Nascimento],
-      'Endereco': [this.servidor.usuario.Endereco],
-      'Telefone': [this.servidor.usuario.Telefone],
-      'Whatsapp': [this.servidor.usuario.Whatsapp],
-      'Email': [this.servidor.usuario.Email],
-      'Login': [this.servidor.usuario.Login, Validators.compose([Validators.required])],
-      'Senha': [this.servidor.usuario.Senha, Validators.compose([Validators.required])],
+    this.route.queryParams.subscribe(params => {
+      if (params && params.special) {
+        this.alunoSelecionado = JSON.parse(params.special);
+        console.log("Meus dados:", this.alunoSelecionado);
+      }
     });
   }
 
   AlterarUsuario() {
     this.usuarioAlterar = this.formCadCliente.value;
+    console.log("Cliente que será atualizado:", this.usuarioAlterar);
     this.alertaAlterar();
   }
 
@@ -56,11 +52,8 @@ export class EditarPerfilPage implements OnInit {
         }, {
           text: 'Confirmar',
           handler: () => {
-            this.servidor.usuario = this.usuarioAlterar;
-            console.log('Estes são os dados de Update do usuario', this.servidor.usuario);
             this.servidor.alteraService(this.usuarioAlterar, this.entidade);
-            this.router.navigate(['/perfil']);
-            
+            this.router.navigate(['/clientes-consultar']);
           }
         }
       ]
@@ -80,8 +73,19 @@ export class EditarPerfilPage implements OnInit {
   }
 
   ngOnInit() {
-
+    this.formCadCliente = this.formBuilder.group({
+      'ID': [this.alunoSelecionado.IDCliente],
+      'Nome': [this.alunoSelecionado.Nome, Validators.compose([Validators.required])],
+      'CPF': [this.alunoSelecionado.CPF, Validators.compose([Validators.required])],
+      'RG': [this.alunoSelecionado.RG],
+      'Nascimento': [this.alunoSelecionado.Nascimento],
+      'Endereco': [this.alunoSelecionado.Endereco],
+      'Telefone': [this.alunoSelecionado.Telefone],
+      'Whatsapp': [this.alunoSelecionado.Whatsapp],
+      'Email': [this.alunoSelecionado.Email],
+      'Login': [this.alunoSelecionado.Login, Validators.compose([Validators.required])],
+      'Senha': [this.alunoSelecionado.Senha, Validators.compose([Validators.required])],
+    });
   }
-
 
 }

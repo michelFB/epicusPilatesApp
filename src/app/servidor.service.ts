@@ -11,25 +11,18 @@ import { Platform } from '@ionic/angular';
 })
 export class ServidorService {
   
+  public API = '';
+  public usuario : Usuario;
+  public listausuarios = [];
   public urlLocal = 'http://192.168.100.24:82/pilatesApp/';
   // public urlLocal = 'https://espacoepicus.000webhostapp.com/';
-
-
-  public API = '';
-  usuario : Usuario;
-  public listausuarios = [];
 
   constructor(private http: HttpClient, private route: ActivatedRoute,
     private router: Router) { 
          
     }
 
-  // método para logar usuário
-  LoginUsuarioService(parans): any {
-    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
-    return this.http.post(this.urlLocal + 'API_loginUsuarios.php', parans, { headers })
-  }
-
+ 
   rotaService(entidade) {
     console.log('root entidade', entidade);
     switch (entidade) {
@@ -39,6 +32,12 @@ export class ServidorService {
       case 'Pacote': { this.API = 'API_Pacote.php'; break;}
       case 'Fisio': { this.API = 'API_Fisio.php'; break;}   
     }
+  }
+
+  // método para logar usuário
+  LoginUsuarioService(parans): any {
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    return this.http.post(this.urlLocal + 'API_loginUsuarios.php', parans, { headers })
   }
 
 

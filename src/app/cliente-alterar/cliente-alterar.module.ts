@@ -1,15 +1,15 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { Routes, RouterModule } from '@angular/router';
-import { IonicModule } from '@ionic/angular';
 import { NgxMaskIonicModule } from 'ngx-mask-ionic';
-import { EditarPerfilPage } from './editar-perfil.page';
+import { IonicModule } from '@ionic/angular';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { ClienteAlterarPage } from './cliente-alterar.page';
 
 const routes: Routes = [
   {
     path: '',
-    component: EditarPerfilPage
+    component: ClienteAlterarPage
   }
 ];
 
@@ -22,6 +22,6 @@ const routes: Routes = [
     RouterModule.forChild(routes),
     NgxMaskIonicModule
   ],
-  declarations: [EditarPerfilPage]
+  declarations: [ClienteAlterarPage]
 })
-export class EditarPerfilPageModule {}
+export class ClienteAlterarPageModule {}

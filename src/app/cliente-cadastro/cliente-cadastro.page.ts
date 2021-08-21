@@ -1,7 +1,9 @@
-import {Router, ActivatedRoute} from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { ServidorService } from './../servidor.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Cliente } from '../models/cliente';
+import { Pacote } from '../models/pacote';
 @Component({
   selector: 'app-cliente-cadastro',
   templateUrl: './cliente-cadastro.page.html',
@@ -9,15 +11,15 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class ClienteCadastroPage implements OnInit {
 
-  public cliente: any = {};
-  public pacotes: any[];
+  public cliente: Cliente;
+  public Teste: Cliente;
+  public pacotes: Pacote;
   public myDate = new Date().toISOString();
-  public entidade = 'Cliente';
-  public entidade2 = 'Pacote';
+  public entidade_Cliente = 'Cliente';
+  public entidade_Pacote = 'Pacote';
   public formCadCliente: FormGroup;
 
-  constructor(public servidor: ServidorService,
-    public formBuilder: FormBuilder,
+  constructor(public servidor: ServidorService, public formBuilder: FormBuilder,
     private router: Router) {
     this.formCadCliente = this.formBuilder.group({
       'Nome': [null, Validators.compose([Validators.required])],
@@ -31,34 +33,27 @@ export class ClienteCadastroPage implements OnInit {
       'Pacote': [null, Validators.compose([Validators.required])],
       'Login': [null, Validators.compose([Validators.required])],
       'Senha': [null, Validators.compose([Validators.required])],
-
     });
-      this.ConsultarPacotes();
-    
+    this.ConsultarPacotes();
   }
-  InserirClientes() {
-    // console.log(this.formCadCliente.value);
-    this.cliente = this.formCadCliente.value;
-    console.log("o cliente que vai: ",this.cliente);
 
-    this.servidor.inserirService(this.cliente, this.entidade);
+  InserirClientes() {
+    this.cliente = this.formCadCliente.value;
+    console.log("Novo Cliente que será cadastrado no banco -->>: ", this.cliente.pacote);
+    this.servidor.inserirService(this.cliente, this.entidade_Cliente);
     this.router.navigate(['/clientes-consultar']);
   }
 
-   ConsultarPacotes() {
-    this.servidor.consultarService(this.entidade2)
+  ConsultarPacotes() {
+    this.servidor.consultarService(this.entidade_Pacote)
       .subscribe(
-      (data: any) => {
-        this.pacotes = data;
-        console.log(data);
-      },
-      (err: any) => {
-        console.log(err);
-      });
-  }
-
-  showdate() {
-    console.log(this.myDate);
+        (data: any) => {
+          this.pacotes = data;
+          console.log(data);
+        },
+        (err: any) => {
+          console.log(err);
+        });
   }
 
   ngOnInit() {

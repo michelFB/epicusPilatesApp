@@ -25,30 +25,33 @@
     </ion-fab-button>
   </ion-fab>
   <ion-card>
-    <h2>{{usuarioLocal.Nome}}</h2>
+    <h2>{{this.servidor.usuario.Nome}}</h2>
     <ion-item>
-      <ion-label> Login: {{usuarioLocal.Login}}</ion-label>
+      <ion-label> Login: {{this.servidor.usuario.Login}}</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>Senha: {{usuarioLocal.Senha}}</ion-label>
+      <ion-label>Senha: {{this.servidor.usuario.Senha}}</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>Endereço: {{usuarioLocal.Endereco}}</ion-label>
+      <ion-label>Endereço: {{this.servidor.usuario.Endereco}}</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>CPF: {{usuarioLocal.CPF}}</ion-label>
+      <ion-label>CPF: {{this.servidor.usuario.CPF}}</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>RG: {{usuarioLocal.RG}}</ion-label>
+      <ion-label>RG: {{this.servidor.usuario.RG}}</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>Telefone: {{usuarioLocal.Telefone}}</ion-label>
+      <ion-label>Nascimento: {{this.servidor.usuario.Nascimento}}</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>Whatsapp: {{usuarioLocal.Whatsapp}}</ion-label>
+      <ion-label>Telefone: {{this.servidor.usuario.Telefone}}</ion-label>
     </ion-item>
     <ion-item>
-      <ion-label>Email: {{usuarioLocal.Email}}</ion-label>
+      <ion-label>Whatsapp: {{this.servidor.usuario.Whatsapp}}</ion-label>
+    </ion-item>
+    <ion-item>
+      <ion-label>Email: {{this.servidor.usuario.Email}}</ion-label>
     </ion-item>
   </ion-card>
 </ion-content>

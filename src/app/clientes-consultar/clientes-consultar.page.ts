@@ -28,6 +28,16 @@ export class ClientesConsultarPage implements OnInit {
     this.router.navigate(['/cliente-cadastro']);
   }
 
+  AtualizaCliente(clienteSelecionado) {
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        special: JSON.stringify(clienteSelecionado),
+      }
+    };
+    this.router.navigate(['/cliente-alterar'], navigationExtras);
+    this.ConsultarClientes();
+  }
+
    ConsultarClientes() {
     this.servidor.consultarService(this.entidade)
       .subscribe(
@@ -47,8 +57,6 @@ export class ClientesConsultarPage implements OnInit {
       }
     };
     this.router.navigate(['/cliente-horario'], navigationExtras);
-    // this.navCtrl.navigateForward(['cliente-horario'], navigationExtras);
-
   }
 
   Anaminese(clienteSelecionado) {

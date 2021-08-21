@@ -18,7 +18,7 @@ import { Usuario } from '../models/usuario';
 export class LoginPage implements OnInit {
 
   public usuario: any = {};
-  usuarioAuxiliar: any = [];
+  public usuarioAuxiliar: any = [];
 
   constructor(public loadingController: LoadingController, public servidor: ServidorService,
     public alertController: AlertController, private route: ActivatedRoute,
@@ -34,8 +34,8 @@ export class LoginPage implements OnInit {
   
     this.servidor.LoginUsuarioService(autentica)
       .subscribe(data => {       
-        this.usuarioAuxiliar = data;
-        this.servidor.usuario = this.usuarioAuxiliar;  
+        // this.usuarioAuxiliar = data;
+        this.servidor.usuario = data;
         console.log(this.servidor.usuario);
         console.log('Usuario encontrado, Logando com Sucesso!! ');
         this.router.navigate(['/home']);

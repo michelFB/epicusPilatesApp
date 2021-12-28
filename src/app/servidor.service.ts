@@ -95,9 +95,9 @@ export class ServidorService {
   }
 
   //EXLUSIVO PARA OBTER AS MARCAÇÕES POR CLIENTE
-  consultarMarcacaoCliente(entidade){
+  consultarMarcacaoCliente(entidade, id){
     this.rotaService(entidade);
-    const id = this.usuario.ID;
+    // const id = this.usuario.ID;
     const JsonDados: any = { key: 'select', dados: id };
     console.log('Json COnsultar Marcação por Cliente', JsonDados);
     const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });

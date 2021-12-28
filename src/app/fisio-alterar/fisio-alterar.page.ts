@@ -39,6 +39,30 @@ export class FisioAlterarPage implements OnInit {
     console.log("Fisio que será atualizado:", this.FisioAlterar);
     this.alertaAlterar();
   }
+  DeletaFisio() {
+    this.alertaDeletar();
+  }
+  async alertaDeletar() {
+    const alert = await this.alertController.create({
+      message: 'Tem certeza que deseja excluir esse <strong>Fisio</strong>?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+          }
+        }, {
+          text: 'Confirmar',
+          handler: () => {
+            this.servidor.deletarService(this.fisioSelecionado.CPF, this.entidade);
+            this.router.navigate(['/fisio-consultar']);
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
 
   async alertaAlterar() {
     const alert = await this.alertController.create({

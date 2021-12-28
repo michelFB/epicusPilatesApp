@@ -50,6 +50,9 @@ export class HomePage implements OnInit {
   horarios(){
     this.router.navigate(['/horarios']);
   }
+  pacotes_clientes(){
+    this.router.navigate(['/pacotes-clientes']);
+  }
 
   ngOnInit() {
     this.VerificaNivelAcesso();

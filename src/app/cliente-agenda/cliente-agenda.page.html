@@ -1,0 +1,78 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Horários do Cliente
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding text-center class="vertical-align-content">
+ 
+
+   <ion-row>
+    <!-- AQUI açao os botões de mes / semana / dia -->
+    <ion-col size="3">
+      <ion-button expand="block" fill="clear" [color]="calendar.mode == 'month' ? 'warning' : 'primary'"
+        (click)="changeMode('month')">MÊS</ion-button>
+    </ion-col>
+    <ion-col size="3">
+      <ion-button expand="block" fill="clear" [color]="calendar.mode == 'week' ? 'warning' : 'primary'"
+        (click)="changeMode('week')">SEMANA</ion-button>
+    </ion-col>
+    <ion-col size="3">
+      <ion-button expand="block" fill="clear" [color]="calendar.mode == 'day' ? 'warning' : 'primary'"
+        (click)="changeMode('day')">DIA</ion-button>
+    </ion-col>
+    <ion-col size="3">
+      <ion-button fill="clear" color="primary" (click)="today()">HOJE</ion-button>
+    </ion-col>
+  </ion-row>
+
+  <ion-row>
+    <!-- seta para esquerda para voltar -->
+    <ion-col size="2" text-left>
+      <ion-button fill="clear" size="small" (click)="back()">
+        <ion-icon name="arrow-back" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-col>
+    <ion-col size="8" text-center>
+      <ion-label>
+        {{ viewTitle }}
+      </ion-label>
+    </ion-col>
+    <!-- seta para direita para avançar -->
+    <ion-col size="2" text-right>
+      <ion-button fill="clear" size="small" (click)="next()">
+        <ion-icon name="arrow-forward" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-col>
+  </ion-row>
+
+  <calendar [eventSource]="eventSource" [calendarMode]="calendar.mode" [currentDate]="calendar.currentDate"
+    (onEventSelected)="onEventSelected($event)" (onTitleChanged)="onViewTitleChanged($event)" startHour="7" endHour="21"
+    step="30" startingDayWeek="1">
+  </calendar>
+</ion-content>
+
+<!-- (onTimeSelected)="onTimeSelected($event)" -->
+
+<!-- Card adicionando Eventos -->
+<!-- <ion-card>
+      <ion-card-content *ngIf="!collapseCard">
+        <ion-item>
+          <ion-label>Horário:</ion-label>
+          <ion-datetime displayFormat="DD/MM/YYYY HH:mm" pickerFormat="D:MMM HH:mm" [(ngModel)]="event.startTime">
+          </ion-datetime>
+        </ion-item>
+        <ion-item>
+          <ion-label>Reposição?</ion-label>
+          <ion-toggle [(ngModel)]="event.Reposicao" disabled="false"></ion-toggle>
+        </ion-item>
+        <ion-button color="success" expand="full" (click)="InserirEvento()">
+          <ion-icon name="checkmark"></ion-icon>Marcar
+        </ion-button>
+      </ion-card-content>
+    </ion-card> -->

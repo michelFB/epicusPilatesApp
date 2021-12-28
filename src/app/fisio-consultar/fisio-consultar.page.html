@@ -8,6 +8,7 @@
     </ion-title>
   </ion-toolbar>
 </ion-header>
+
 <ion-content class="ion-padding">
   <!-- fab placed to the (vertical) center and end -->
   <ion-fab vertical="top" horizontal="end" slot="fixed">
@@ -20,6 +21,7 @@
     <h1>Lista de Fisios</h1>
   </ion-label>
   <ion-searchbar inputmode="numeric"></ion-searchbar>
+  
   <ion-list *ngFor="let Fisios of Fisio; let i = index">
     <ion-row>
       <ion-col size="8">
@@ -32,22 +34,22 @@
       </ion-col>
       <ion-col size="4">
         <ion-row>
-          <ion-button fill="clear" size="small" color="light" (click)="HorarioFisio(Fisios)">
-            <ion-icon name="calendar" color="primary" slot="end"></ion-icon>
-          </ion-button>
           <ion-button fill="clear" size="small" color="light" (click)="AtualizaFisio(Fisios)">
             <ion-icon name="person" color="success" slot="end"></ion-icon>
           </ion-button>
+            <ion-button fill="clear" size="small" color="light" (click)="HorarioFisio(Fisios)">
+              <ion-icon name="clock" color="primary" slot="end"></ion-icon>
+            </ion-button>
         </ion-row>
         <ion-row>
-         
-          <ion-button fill="clear" size="small" color="light" (click)="DeletaFisio(Fisios)">
-            <ion-icon name="trash" color="danger" slot="end"></ion-icon>
+          <ion-button fill="clear" size="small" color="light" (click)="HorarioFisio(Fisios)">
+            <ion-icon name="calendar" color="primary" slot="end"></ion-icon>
           </ion-button>
+          <!-- <ion-button fill="clear" size="small" color="light" (click)="DeletaFisio(Fisios)">
+            <ion-icon name="trash" color="danger" slot="end"></ion-icon>
+          </ion-button> -->
         </ion-row>
       </ion-col>
     </ion-row>
-
-
   </ion-list>
 </ion-content>

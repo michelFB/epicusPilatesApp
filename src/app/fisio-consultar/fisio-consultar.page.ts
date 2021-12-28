@@ -19,17 +19,9 @@ export class FisioConsultarPage implements OnInit {
   public entidade = 'Fisio';
 
   // tslint:disable-next-line:max-line-length
-  constructor(
-    public loadingController: LoadingController,
-    public servidor: ServidorService,
-    public alertController: AlertController,
-    private router: Router,
-    public navCtrl: NavController) {
+  constructor(public loadingController: LoadingController, public servidor: ServidorService,
+    public alertController: AlertController, private router: Router, public navCtrl: NavController) {
     this.ConsultarFisios();
-  }
-
-  AdicionarFisio() {
-    this.router.navigate(['/fisio-cadastro']);
   }
 
   ConsultarFisios() {
@@ -42,6 +34,10 @@ export class FisioConsultarPage implements OnInit {
         (err) => {
           console.log(err);
         });
+  }
+
+  AdicionarFisio() {
+    this.router.navigate(['/fisio-cadastro']);
   }
 
   HorarioFisio(FisioSelecionado) {
@@ -63,43 +59,16 @@ export class FisioConsultarPage implements OnInit {
     this.ConsultarFisios();
   }
 
-  DeletaFisio(Fisio) {
-    this.id = Fisio.CPF;
-    this.alertaDeletar();
-  }
 
-  async alertaDeletar() {
-    const alert = await this.alertController.create({
-      message: 'Tem certeza que deseja excluir esse <strong>Fisio</strong>?',
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: (blah) => {
-          }
-        }, {
-          text: 'Confirmar',
-          handler: () => {
-            this.servidor.deletarService(this.id, this.entidade);
-            this.ngOnInit();
-          }
-        }
-      ]
-    });
-    await alert.present();
-  }
-
-  async presentLoading() {
-    const loading = await this.loadingController.create({
-      message: 'Aguarde!',
-      duration: 1000
-    });
-    await loading.present();
-    const { role, data } = await loading.onDidDismiss();
-    console.log('Loading dismissed!');
-  }
-
+  // async presentLoading() {
+  //   const loading = await this.loadingController.create({
+  //     message: 'Aguarde!',
+  //     duration: 1000
+  //   });
+  //   await loading.present();
+  //   const { role, data } = await loading.onDidDismiss();
+  //   console.log('Loading dismissed!');
+  // }
 
   ngOnInit() {
     this.ConsultarFisios();

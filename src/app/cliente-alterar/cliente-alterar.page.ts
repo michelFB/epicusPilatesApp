@@ -41,6 +41,32 @@ export class ClienteAlterarPage implements OnInit {
     this.alertaAlterar();
   }
 
+  DeletaCliente() {
+    this.alertaDeletar();
+  }
+
+  async alertaDeletar() {
+    const alert = await this.alertController.create({
+      message: 'Tem certeza que deseja excluir esse <strong>cliente</strong>?',
+      buttons: [
+        {
+          text: 'Cancelar',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: (blah) => {
+          }
+        }, {
+          text: 'Confirmar',
+          handler: () => {
+            this.servidor.deletarService(this.alunoSelecionado.IDCliente, this.entidade);
+            this.router.navigate(['/clientes-consultar']);
+          }
+        }
+      ]
+    });
+    await alert.present();
+  }
+
   async alertaAlterar() {
     const alert = await this.alertController.create({
       message: '<strong>Tem certeza</strong> que deseja alterar seus dados?',

@@ -19,7 +19,8 @@ export class ClienteHorarioPage implements OnInit {
   alunoSelecionado: any;
 
 
-  constructor(public servidor: ServidorService, private route: ActivatedRoute, private router: Router, public toastController: ToastController) {
+  constructor(public servidor: ServidorService, private router: Router, private route: ActivatedRoute, 
+    public toastController: ToastController, ) {
     this.route.queryParams.subscribe(params => {
       if (params && params.special) {
         this.alunoSelecionado = JSON.parse(params.special);
@@ -41,7 +42,7 @@ export class ClienteHorarioPage implements OnInit {
     console.log(dados);
     this.servidor.MarcacaoClienteMesSemana(dados, this.entidade);
     this.presentToast('Marcação Realizada com Sucesso!!');
-    this.ngOnInit();
+    this.router.navigate(['/clientes-consultar']);
   }
 
   //MENSAGEM NA TELA

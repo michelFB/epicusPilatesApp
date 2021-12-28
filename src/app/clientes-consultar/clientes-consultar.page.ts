@@ -24,6 +24,18 @@ export class ClientesConsultarPage implements OnInit {
     this.ConsultarClientes();
   }
 
+  ConsultarClientes() {
+    this.servidor.consultarService(this.entidade)
+      .subscribe(
+        (data) => {
+          this.cliente = data;
+          console.log('Consultando os clientes', data);
+        },
+        (err) => {
+          console.log(err);
+        });
+  }
+
   AdicionarCliente(){
     this.router.navigate(['/cliente-cadastro']);
   }
@@ -38,18 +50,6 @@ export class ClientesConsultarPage implements OnInit {
     this.ConsultarClientes();
   }
 
-   ConsultarClientes() {
-    this.servidor.consultarService(this.entidade)
-      .subscribe(
-        (data) => {
-          this.cliente = data;
-          console.log('Consultando os clientes', data);
-        },
-        (err) => {
-          console.log(err);
-        });
-  }
-
   HorarioCliente(clienteSelecionado) {
     let navigationExtras: NavigationExtras = {
       queryParams: {
@@ -57,6 +57,15 @@ export class ClientesConsultarPage implements OnInit {
       }
     };
     this.router.navigate(['/cliente-horario'], navigationExtras);
+  }
+
+  AgendaCliente(clienteSelecionado){
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        special: JSON.stringify(clienteSelecionado),
+      }
+    };
+    this.router.navigate(['/cliente-agenda'], navigationExtras);
   }
 
   Anaminese(clienteSelecionado) {
@@ -68,43 +77,15 @@ export class ClientesConsultarPage implements OnInit {
     this.router.navigate(['/cliente-anaminese'], navigationExtras);
   }
 
-  DeletaCliente(cliente) {
-    this.id = cliente.IDCliente;
-    this.alertaDeletar();
-  }
-
-  async alertaDeletar() {
-    const alert = await this.alertController.create({
-      message: 'Tem certeza que deseja excluir esse <strong>cliente</strong>?',
-      buttons: [
-        {
-          text: 'Cancelar',
-          role: 'cancel',
-          cssClass: 'secondary',
-          handler: (blah) => {
-          }
-        }, {
-          text: 'Confirmar',
-          handler: () => {
-            this.servidor.deletarService(this.id, this.entidade);
-            this.ngOnInit();
-          }
-        }
-      ]
-    });
-    await alert.present();
-  }
-
-  async presentLoading() {
-    const loading = await this.loadingController.create({
-      message: 'Aguarde!',
-      duration: 1000
-    });
-    await loading.present();
-    const { role, data } = await loading.onDidDismiss();
-    console.log('Loading dismissed!');
-  }
-
+  // async presentLoading() {
+  //   const loading = await this.loadingController.create({
+  //     message: 'Aguarde!',
+  //     duration: 1000
+  //   });
+  //   await loading.present();
+  //   const { role, data } = await loading.onDidDismiss();
+  //   console.log('Loading dismissed!');
+  // }
 
   ngOnInit() {
     this.ConsultarClientes();

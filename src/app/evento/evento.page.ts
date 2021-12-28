@@ -164,7 +164,7 @@ export class EventoPage implements OnInit {
   // Consulta um evento **************************************************************************
   ConsultarEvento() {
     this.opcaoEventos = "minhas_aulas";
-    this.servidor.consultarMarcacaoCliente(this.entidade)
+    this.servidor.consultarMarcacaoCliente(this.entidade, this.servidor.usuario.ID)
       .subscribe(
         (data: any) => {
           this.eventSource = [];

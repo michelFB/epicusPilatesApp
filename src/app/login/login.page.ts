@@ -23,15 +23,19 @@ export class LoginPage implements OnInit {
   constructor(public loadingController: LoadingController, public servidor: ServidorService,
     public alertController: AlertController, private route: ActivatedRoute,
     private router: Router, public toastController: ToastController) {
+    this.fazerLogin()
+    
   }
 
   // FAZER LOGIN
   fazerLogin() {
     const autentica = {
-      login: this.usuario.login,
-      senha: this.usuario.senha
+      // login: this.usuario.login,
+      // senha: this.usuario.senha
+      login: "michelfb", 
+      senha: "1234"
     };
-  
+    console.log("Dados de Autenticação",autentica);
     this.servidor.LoginUsuarioService(autentica)
       .subscribe(data => {       
         // this.usuarioAuxiliar = data;

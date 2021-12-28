@@ -14,7 +14,7 @@ export class ServidorService {
   public API = '';
   public usuario : Usuario;
   public listausuarios = [];
-  public urlLocal = 'http://192.168.100.24:82/pilatesApp/';
+  public urlLocal = 'http://192.168.0.108:82/pilatesApp/';
   // public urlLocal = 'https://espacoepicus.000webhostapp.com/';
 
   constructor(private http: HttpClient, private route: ActivatedRoute,
@@ -169,6 +169,21 @@ export class ServidorService {
     const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
     return this.http.post(this.urlLocal + this.API, JsonDados, { headers }); //retorna o Json da API
   }
+
+  //EXLUSIVO PARA OBTER AS MARCAÇÕES POR CLIENTE
+  GerarHorarioMensal(dados, entidade) {
+    this.rotaService(entidade);
+    const JsonDados: any = { key: 'gerarMensal', dados };
+    console.log('Json Gerar Horário Mensal', JsonDados);
+    const headers = new HttpHeaders({ 'Content-Type': 'application/x-www-form-urlencoded' });
+    this.http.post(this.urlLocal + this.API, JsonDados, { headers }) //retorna o Json da API
+      .subscribe(data => {
+        console.log(data);
+      }, error => {
+        console.log(error);
+      });
+  }
+
 
 
   // uploadimagem(image){

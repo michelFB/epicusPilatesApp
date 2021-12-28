@@ -53,6 +53,16 @@ export class FisioConsultarPage implements OnInit {
     // this.router.navigate(['/Fisio-horario'], navigationExtras);
    }
 
+  AtualizaFisio(FisioSelecionado){
+    let navigationExtras: NavigationExtras = {
+      queryParams: {
+        special: JSON.stringify(FisioSelecionado),
+      }
+    };
+    this.router.navigate(['/fisio-alterar'], navigationExtras);
+    this.ConsultarFisios();
+  }
+
   DeletaFisio(Fisio) {
     this.id = Fisio.CPF;
     this.alertaDeletar();

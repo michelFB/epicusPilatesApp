@@ -7,13 +7,30 @@ import { Router, ActivatedRoute } from '@angular/router';
   styleUrls: ['./home.page.scss'],
 })
 export class HomePage implements OnInit {
+  buttonDisabled: boolean;
+  entidade = 'usuario';
 
 
   constructor(public servidor: ServidorService, private router: Router) {
   }
 
+  VerificaNivelAcesso() {
+  
+    console.log("Nivel de acesso: "+this.servidor.usuario.Perfil)
+    if (this.servidor.usuario.Perfil == "Admin") {
+      this.buttonDisabled = false;
+    } else {
+      this.buttonDisabled = true;
+    };
+    console.log("Retorno do Botão: " + this.buttonDisabled);
+    
+  }
+
   agenda() {
     this.router.navigate(['/evento']);
+  }
+  perfil() {
+    this.router.navigate(['/perfil']);
   }
   alunos() {
     this.router.navigate(['/clientes-consultar']);
@@ -30,7 +47,12 @@ export class HomePage implements OnInit {
   salarios() {
     this.router.navigate(['/evento']);
   }
+  horarios(){
+    this.router.navigate(['/horarios']);
+  }
+
   ngOnInit() {
+    this.VerificaNivelAcesso();
 
   }
 }

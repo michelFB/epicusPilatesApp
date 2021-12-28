@@ -4,7 +4,7 @@
       <ion-back-button defaultHref="home"></ion-back-button>
     </ion-buttons>
     <ion-title>
-      Atualizar Dados dos Clientes
+      Atualizar Dados da Fisioterapeutas
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -14,8 +14,8 @@
     <img src="/assets/imgs/foto.jpg" width="100" height="100" />
   </div>
   <ion-card>
-    <form [formGroup]="formCadCliente" (ngSubmit)="AlterarUsuario()">
-      <ion-button icon-left expand="block" fill="solid" type="submit" [disabled]="!formCadCliente.valid">
+    <form [formGroup]="formCadFisio" (ngSubmit)="AlterarFisio()">
+      <ion-button icon-left expand="block" fill="solid" type="submit" [disabled]="!formCadFisio.valid">
         <ion-icon name="refresh"></ion-icon>Atualizar
       </ion-button>
 
@@ -25,8 +25,8 @@
         </ion-input>
       </ion-item>
 
-      <div *ngIf="formCadCliente.controls.Nome.errors" style="color: red;">
-        <p *ngIf="formCadCliente.controls.Nome.errors.required"><small>Campo obrigatório</small></p>
+      <div *ngIf="formCadFisio.controls.Nome.errors" style="color: red;">
+        <p *ngIf="formCadFisio.controls.Nome.errors.required"><small>Campo obrigatório</small></p>
       </div>
 
       <ion-item class="ion-activated">
@@ -34,8 +34,8 @@
         <ion-input formControlName="CPF" placeholder="000.000.00-00" mask="000.000.000-00" type="text">
         </ion-input>
       </ion-item>
-      <div *ngIf="formCadCliente.controls.CPF.errors" style="color: red;">
-        <p *ngIf="formCadCliente.controls.CPF.errors.required"><small>Campo obrigatório</small></p>
+      <div *ngIf="formCadFisio.controls.CPF.errors" style="color: red;">
+        <p *ngIf="formCadFisio.controls.CPF.errors.required"><small>Campo obrigatório</small></p>
       </div>
 
       <ion-item class="ion-activated">
@@ -68,18 +68,9 @@
         <ion-input formControlName="Email" placeholder="seuemail@provedor.com" mask="A*@A*.S*"
           [dropSpecialCharacters]="false" type="text"></ion-input>
       </ion-item>
-      <ion-item>
-        <ion-label position="floating">Pacote escolhido</ion-label>
-        <ion-select formControlName="Pacote" type="number" placeholder="Selecione o Pacote">
-          <ion-select-option *ngFor="let pacote of pacotes">{{pacote.Id}}</ion-select-option>
-        </ion-select>
-      </ion-item>
-      <div *ngIf="formCadCliente.controls.Pacote.errors" style="color: red;">
-        <p *ngIf="formCadCliente.controls.Pacote.errors.required"><small>Campo obrigatório</small></p>
-      </div>
       <ion-item class="ion-activated">
-        <ion-label position="floating">Contrato</ion-label>
-        <ion-input formControlName="Contrato" placeholder="00000000000" mask="00000000000" type="text">
+        <ion-label position="floating">Crefito</ion-label>
+        <ion-input formControlName="Crefito" placeholder="00000000000" mask="00000000000" type="text">
         </ion-input>
       </ion-item>
       <h2 style=" text-align: center">Dados de Autenticação</h2>
@@ -88,8 +79,8 @@
         <ion-input formControlName="Login" type="text" placeholder="Digite um login de usuário">
         </ion-input>
       </ion-item>
-      <div *ngIf="formCadCliente.controls.Login.errors" style="color: red;">
-        <p *ngIf="formCadCliente.controls.Login.errors.required"><small>Campo obrigatório</small></p>
+      <div *ngIf="formCadFisio.controls.Login.errors" style="color: red;">
+        <p *ngIf="formCadFisio.controls.Login.errors.required"><small>Campo obrigatório</small></p>
       </div>
 
       <ion-item>
@@ -97,8 +88,8 @@
         <ion-input formControlName="Senha" type="text" placeholder="Digite uma senha de 8 dígitos">
         </ion-input>
       </ion-item>
-      <div *ngIf="formCadCliente.controls.Senha.errors" style="color: red;">
-        <p *ngIf="formCadCliente.controls.Senha.errors.required"><small>Campo obrigatório</small></p>
+      <div *ngIf="formCadFisio.controls.Senha.errors" style="color: red;">
+        <p *ngIf="formCadFisio.controls.Senha.errors.required"><small>Campo obrigatório</small></p>
       </div>
     </form>
   </ion-card>

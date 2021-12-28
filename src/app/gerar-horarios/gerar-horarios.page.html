@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar color="light">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>
+      GERAR HORÁRIOS
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+<ion-content class="ion-padding">
+  
+  <form (ngSubmit)="CadastrarHorarioMensal()">
+    <ion-item>
+      <ion-label>MÊS / ANO</ion-label>
+      <ion-datetime name="mesAno" [(ngModel)]="horarioAgenda.diamesAno" displayFormat="MM/YYYY" pickerFormat="MMMM YYYY">
+      </ion-datetime>
+    </ion-item>
+    <ion-item>
+      <ion-label>FISIOTERAPEUTA</ion-label>
+      <ion-select name="diaSemana" [(ngModel)]="horarioAgenda.Fisio" placeholder="Fisios">
+        <ion-select-option *ngFor="let fisio of fisios">{{fisio.IDFisio}}</ion-select-option>
+      </ion-select>
+    </ion-item>
+    <ion-button expand="block" fill="solid" type="submit">
+      <ion-icon name="clock"></ion-icon> GERAR HORÁRIO MENSAL </ion-button>
+  </form>
+  <br/> <br />
+
+  <form (ngSubmit)="CadastrarHorarioDiario()">
+    <ion-item>
+      <ion-label>DIA / MÊS / ANO</ion-label>
+      <ion-datetime name="mesAno" [(ngModel)]="horarioAgenda.diamesAno" displayFormat="DD/MM/YYYY" pickerFormat="DD MMMM YYYY">
+      </ion-datetime>
+    </ion-item>
+  <ion-item>
+    <ion-label>FISIOTERAPEUTA</ion-label>
+    <ion-select name="diaSemana" [(ngModel)]="horarioAgenda.Fisio" placeholder="Fisios">
+        <ion-select-option *ngFor="let fisio of fisios">{{fisio.IDFisio}}</ion-select-option>
+    </ion-select>
+  </ion-item>
+   
+    <ion-button expand="block" fill="solid" type="submit" color="secondary">
+      <ion-icon name="clock"></ion-icon> GERAR HORÁRIO POR DIA
+    </ion-button>
+  </form>
+
+</ion-content>

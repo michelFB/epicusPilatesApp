@@ -1,11 +1,10 @@
-import { Cliente } from './../models/cliente';
 import { Component, OnInit } from '@angular/core';
-import { Usuario } from './../models/usuario';
 import { ServidorService } from './../servidor.service';
 import { LoadingController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Pacote } from '../models/pacote';
 
 @Component({
   selector: 'app-cliente-alterar',
@@ -18,6 +17,8 @@ export class ClienteAlterarPage implements OnInit {
   image: any;
   public formCadCliente: FormGroup;
   public alunoSelecionado: any = {};
+  public pacotes: Pacote;
+  public entidade_Pacote = 'Pacote';
 
   constructor(public servidor: ServidorService,
     public loadingController: LoadingController,
@@ -25,6 +26,7 @@ export class ClienteAlterarPage implements OnInit {
     public formBuilder: FormBuilder,
     private route: ActivatedRoute,
     private router: Router) {
+    this.ConsultarPacotes();
     this.route.queryParams.subscribe(params => {
       if (params && params.special) {
         this.alunoSelecionado = JSON.parse(params.special);
@@ -72,6 +74,19 @@ export class ClienteAlterarPage implements OnInit {
     console.log('Loading dismissed!');
   }
 
+
+  ConsultarPacotes() {
+    this.servidor.consultarService(this.entidade_Pacote)
+      .subscribe(
+        (data: any) => {
+          this.pacotes = data;
+          console.log(data);
+        },
+        (err: any) => {
+          console.log(err);
+        });
+  }
+
   ngOnInit() {
     this.formCadCliente = this.formBuilder.group({
       'ID': [this.alunoSelecionado.IDCliente],
@@ -83,6 +98,8 @@ export class ClienteAlterarPage implements OnInit {
       'Telefone': [this.alunoSelecionado.Telefone],
       'Whatsapp': [this.alunoSelecionado.Whatsapp],
       'Email': [this.alunoSelecionado.Email],
+      'Pacote': [this.alunoSelecionado.Pacote, Validators.compose([Validators.required])],
+      'Contrato': [this.alunoSelecionado.Contrato],
       'Login': [this.alunoSelecionado.Login, Validators.compose([Validators.required])],
       'Senha': [this.alunoSelecionado.Senha, Validators.compose([Validators.required])],
     });

@@ -10,10 +10,11 @@ export class Usuario {
    private _Telefone: string;
    private _Whatsapp: string;
    private _Email: string;
+   private _Perfil: string;
 
    constructor(pID: number, pLogin: string, pSenha: string, pNome: string,
       pCPF: string, pRG: string, pNascimento: string, pEndereco: string,
-      pTelefone: string, pWhatsapp: string, pEmail: string) {
+      pTelefone: string, pWhatsapp: string, pEmail: string, pPerfil: string) {
       this.ID = pID;
       this.Login = pLogin;
       this.Senha = pSenha;
@@ -25,6 +26,7 @@ export class Usuario {
       this.Telefone = pTelefone;
       this.Whatsapp = pWhatsapp;
       this.Email = pEmail;
+      this.Perfil = pPerfil;
    }
 
    public get ID(): number {
@@ -93,5 +95,12 @@ export class Usuario {
    public set Email(value: string) {
       this._Email = value;
    }
+   public get Perfil(): string {
+      return this._Perfil;
+   }
+   public set Perfil(value: string) {
+      this._Perfil = value;
+   }
+
 
 }

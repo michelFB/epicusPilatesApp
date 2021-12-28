@@ -40,7 +40,6 @@ export class EventoPage implements OnInit {
   }
 
   // Cria um evento atraves do card****************************************************
-
   VerificaRep() {
     this.servidor.verificaReposicao(this.entidade)
       .subscribe(

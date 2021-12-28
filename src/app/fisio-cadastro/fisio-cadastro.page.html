@@ -11,64 +11,81 @@
 
 <ion-content>
   <ion-card>
-    <form (ngSubmit)="InserirFisios()">
+    <form [formGroup]="formCadFisio" (ngSubmit)="InserirFisios()">
       <ion-item>
         <ion-label position="floating">Nome</ion-label>
-        <ion-input placeholder="Digite seu nome completo" type="text" name="Nome" [(ngModel)]="Fisio.Nome">
+        <ion-input formControlName="Nome" placeholder="Digite seu nome completo" type="text">
         </ion-input>
       </ion-item>
+    
+      <div *ngIf="formCadFisio.controls.Nome.errors" style="color: red;">
+        <p *ngIf="formCadFisio.controls.Nome.errors.required"><small>Campo obrigatório</small></p>
+      </div>
+    
       <ion-item class="ion-activated">
         <ion-label position="floating">CPF</ion-label>
-        <ion-input placeholder="000.000.00-00" mask="000.000.000-00" type="text" name="CPF" [(ngModel)]="Fisio.CPF">
+        <ion-input formControlName="CPF" placeholder="000.000.00-00" mask="000.000.000-00" type="text">
         </ion-input>
       </ion-item>
+      <div *ngIf="formCadFisio.controls.CPF.errors" style="color: red;">
+        <p *ngIf="formCadFisio.controls.CPF.errors.required"><small>Campo obrigatório</small></p>
+      </div>
+    
       <ion-item class="ion-activated">
         <ion-label position="floating">RG</ion-label>
-        <ion-input placeholder="000.000.00-00" mask="000.000.00-00" type="text" name="RG" [(ngModel)]="Fisio.RG">
+        <ion-input formControlName="RG" placeholder="000.000.00-00" mask="000.000.00-00" type="text">
         </ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Nascimento</ion-label>
-        <ion-datetime name="nascimento" type="date" placeholder="Selecione sua data de nascimento"
-          displayFormat="DD/MM/YYYY" [(ngModel)]="Fisio.Nascimento"></ion-datetime>
+        <ion-datetime formControlName="Nascimento" type="date" placeholder="Selecione sua data de nascimento"
+          displayFormat="DD/MM/YYYY"></ion-datetime>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Endereco</ion-label>
-        <ion-input placeholder="Informe seu Endereço" type="text" name="Endereco" [(ngModel)]="Fisio.Endereco">
+        <ion-input formControlName="Endereco" placeholder="Informe seu Endereço" type="text">
         </ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Telefone</ion-label>
-        <ion-input placeholder="(000) 00000-0000" mask="(000) 00000-0000" maxlength="16" type="text" name="Telefone"
-          [(ngModel)]="Fisio.Telefone"></ion-input>
+        <ion-input formControlName="Telefone" placeholder="(000) 00000-0000" mask="(000) 00000-0000" maxlength="16"
+          type="text"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Whatsapp</ion-label>
-        <ion-input placeholder="(000) 00000-0000" mask="(000) 00000-0000" type="text" name="Whatsapp"
-          [(ngModel)]="Fisio.Whatsapp"></ion-input>
+        <ion-input formControlName="Whatsapp" placeholder="(000) 00000-0000" mask="(000) 00000-0000" type="text">
+        </ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">E-mail</ion-label>
-        <ion-input placeholder="seuemail@provedor.com" mask="A*@A*.S*" [dropSpecialCharacters]="false" type="text"
-          name="Email" [(ngModel)]="Fisio.Email"></ion-input>
+        <ion-input formControlName="Email" placeholder="seuemail@provedor.com" mask="A*@A*.S*"
+          [dropSpecialCharacters]="false" type="text"></ion-input>
       </ion-item>
-      <ion-item>
-        <ion-label position="floating">Crefito</ion-label>
-        <ion-input placeholder="Informe seu Endereço" type="text" name="Crefito" [(ngModel)]="Fisio.Crefito">
-        </ion-input>
-      </ion-item>
-      <ion-title>Dados de Autenticação</ion-title>
+    <ion-item>
+      <ion-label position="floating">Crefito</ion-label>
+      <ion-input formControlName="Crefito" placeholder="(00000" mask="00000" maxlength="16"
+        type="text"></ion-input>
+    </ion-item>
+      <h2 style=" text-align: center">Dados de Autenticação</h2>
       <ion-item>
         <ion-label position="floating">Login</ion-label>
-        <ion-input type="text" name="Login" placeholder="Digite um login de usuário" [(ngModel)]="Fisio.Login">
+        <ion-input formControlName="Login" type="text" placeholder="Digite um login de usuário">
         </ion-input>
       </ion-item>
+      <div *ngIf="formCadFisio.controls.Login.errors" style="color: red;">
+        <p *ngIf="formCadFisio.controls.Login.errors.required"><small>Campo obrigatório</small></p>
+      </div>
+    
       <ion-item>
         <ion-label position="floating">Senha</ion-label>
-        <ion-input type="text" name="Senha" placeholder="Digite uma senha de 8 dígitos" [(ngModel)]="Fisio.Senha">
+        <ion-input formControlName="Senha" type="text" placeholder="Digite uma senha de 8 dígitos">
         </ion-input>
       </ion-item>
-      <ion-button expand="block" fill="solid" type="submit">
+      <div *ngIf="formCadFisio.controls.Senha.errors" style="color: red;">
+        <p *ngIf="formCadFisio.controls.Senha.errors.required"><small>Campo obrigatório</small></p>
+      </div>
+    
+      <ion-button expand="block" fill="solid" type="submit" [disabled]="!formCadFisio.valid">
         <ion-icon name="albums"></ion-icon>CADASTRAR
       </ion-button>
     </form>
